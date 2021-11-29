@@ -1,0 +1,176 @@
+@charset "UTF-8";
+/*! =====このcssファイルはsassから生成されています。===== */
+body {
+  background-attachment: fixed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#AAF), to(white)) fixed;
+  background: linear-gradient(#AAF, white) fixed;
+  color: #000;
+}
+
+a {
+  color: #000;
+}
+a:link {
+  color: #000;
+}
+a:visited {
+  color: #666666;
+}
+a:active {
+  color: #C33;
+}
+a:hover {
+  color: #C33;
+}
+
+hr {
+  border-style: dashed;
+  border-color: #523;
+}
+
+header, .thread, footer {
+  background-color: #EDF;
+}
+
+header {
+  border-color: #523;
+}
+
+h1 a:visited {
+  color: #666666;
+}
+h1 a:hover {
+  color: #C33;
+}
+
+.thread, footer {
+  border-color: #523;
+}
+
+input, textarea {
+  border-color: #CAA #FEE #FEE #CAA;
+  color: #000;
+  background-color: #EEF;
+}
+
+select {
+  border-color: #CAA #FEE #FEE #CAA;
+  color: #000;
+  background-color: #EEF;
+}
+
+input[type=submit] {
+  border-color: #FEE #CAA #CAA #FEE;
+  color: #000;
+  background-color: #DCC;
+}
+
+input[name=upfile] {
+  border-color: #FEE #CAA #CAA #FEE;
+  color: #000;
+  background-color: #DCC;
+}
+
+figure {
+  background-color: #EDF;
+}
+
+.oyaname {
+  border: solid 1px #DCC;
+}
+
+.oyaname:hover {
+  background-color: #AAF;
+}
+
+.res {
+  border-color: #523;
+}
+
+.limit {
+  background-color: #CAA;
+}
+
+.resma {
+  color: #336;
+  background-color: #AAF;
+}
+
+button {
+  border-color: #FEE #CAA #CAA #FEE;
+  color: #000;
+  background-color: #DCC;
+  background-color: #DCC;
+  color: #000;
+}
+
+.button {
+  border-color: #FEE #CAA #CAA #FEE;
+  color: #000;
+  background-color: #DCC;
+}
+.button a {
+  color: #000;
+}
+.button a svg {
+  fill: #000;
+}
+
+.oyat {
+  border-color: #523;
+  background: -webkit-gradient(linear, left top, right top, from(#8AC), color-stop(#5284b5), to(#6473bd)) fixed;
+  background: linear-gradient(to right, #8AC, #5284b5, #6473bd) fixed;
+  color: #310;
+}
+
+#appstage .palette .palette_set {
+  border-color: #CAA #FEE #FEE #CAA;
+  color: #000;
+  background-color: #EEF;
+}
+
+.NEO .color_bk {
+  color: #999;
+}
+.NEO .color_bk2 {
+  color: #767;
+}
+.NEO .color_tool_icon {
+  color: #445;
+}
+.NEO .color_icon {
+  color: #333;
+}
+.NEO .color_iconselect {
+  color: #332;
+}
+.NEO .color_text {
+  color: #EEF;
+}
+.NEO .color_bar {
+  color: #556;
+}
+.NEO .tool_color_button {
+  color: #878;
+}
+.NEO .tool_color_button2 {
+  color: #545;
+}
+.NEO .tool_color_text {
+  color: #FFF;
+}
+.NEO .tool_color_bar {
+  color: #89A;
+}
+.NEO .tool_color_frame {
+  color: #765;
+}
+
+#cp {
+  scroll-behavior: smooth;
+}
+
+.delfo th, .delfo td {
+  border-color: #AAF;
+}
+/*# sourceMappingURL=mono.css.map */
