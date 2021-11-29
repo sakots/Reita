@@ -2,138 +2,138 @@
 /*! =====このcssファイルはsassから生成されています。===== */
 body {
   background-attachment: fixed;
-  background: -webkit-gradient(linear, left top, left bottom, from(#AAF), to(white)) fixed;
-  background: linear-gradient(#AAF, white) fixed;
-  color: #000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#224), to(black)) fixed;
+  background: linear-gradient(#224, black) fixed;
+  color: #EEE;
 }
 
 a {
-  color: #000;
+  color: #EEE;
 }
 a:link {
-  color: #000;
+  color: #EEE;
 }
 a:visited {
-  color: #666666;
+  color: #999;
 }
 a:active {
-  color: #C33;
+  color: #C00;
 }
 a:hover {
-  color: #C33;
+  color: #C00;
 }
 
 hr {
   border-style: dashed;
-  border-color: #523;
+  border-color: #632;
 }
 
 header, .thread, footer {
-  background-color: #EDF;
+  background-color: #122;
 }
 
 header {
-  border-color: #523;
+  border-color: #632;
 }
 
 h1 a:visited {
-  color: #666666;
+  color: #999;
 }
 h1 a:hover {
-  color: #C33;
+  color: #C00;
 }
 
 .thread, footer {
-  border-color: #523;
+  border-color: #632;
 }
 
 input, textarea {
-  border-color: #CAA #FEE #FEE #CAA;
+  border-color: #224 #446 #446 #224;
   color: #000;
-  background-color: #EEF;
+  background-color: #DDE;
 }
 
 select {
-  border-color: #CAA #FEE #FEE #CAA;
+  border-color: #224 #446 #446 #224;
   color: #000;
-  background-color: #EEF;
+  background-color: #DDE;
 }
 
 input[type=submit] {
-  border-color: #FEE #CAA #CAA #FEE;
-  color: #000;
-  background-color: #DCC;
+  border-color: #446 #224 #224 #446;
+  color: #FFF;
+  background-color: #335;
 }
 
 input[name=upfile] {
-  border-color: #FEE #CAA #CAA #FEE;
-  color: #000;
-  background-color: #DCC;
+  border-color: #446 #224 #224 #446;
+  color: #FFF;
+  background-color: #335;
 }
 
 figure {
-  background-color: #EDF;
+  background-color: #122;
 }
 
 .oyaname {
-  border: solid 1px #DCC;
+  border: solid 1px #335;
 }
 
 .oyaname:hover {
-  background-color: #AAF;
+  background-color: #224;
 }
 
 .res {
-  border-color: #523;
+  border-color: #632;
 }
 
 .limit {
-  background-color: #CAA;
+  background-color: #543;
 }
 
 .resma {
-  color: #336;
-  background-color: #AAF;
+  color: #C8C;
+  background-color: #224;
 }
 
 button {
-  border-color: #FEE #CAA #CAA #FEE;
-  color: #000;
-  background-color: #DCC;
-  background-color: #DCC;
-  color: #000;
+  border-color: #446 #224 #224 #446;
+  color: #FFF;
+  background-color: #335;
+  background-color: #335;
+  color: #FFF;
 }
 
 .button {
-  border-color: #FEE #CAA #CAA #FEE;
-  color: #000;
-  background-color: #DCC;
+  border-color: #446 #224 #224 #446;
+  color: #FFF;
+  background-color: #335;
 }
 .button a {
-  color: #000;
+  color: #FFF;
 }
 .button a svg {
-  fill: #000;
+  fill: #FFF;
 }
 
 .oyat {
-  border-color: #523;
-  background: -webkit-gradient(linear, left top, right top, from(#8AC), color-stop(#5284b5), to(#6473bd)) fixed;
-  background: linear-gradient(to right, #8AC, #5284b5, #6473bd) fixed;
-  color: #310;
+  border-color: #632;
+  background: -webkit-gradient(linear, left top, right top, from(#342), color-stop(#668844), to(#5e6633)) fixed;
+  background: linear-gradient(to right, #342, #668844, #5e6633) fixed;
+  color: #DFE;
 }
 
 #appstage .palette .palette_set {
-  border-color: #CAA #FEE #FEE #CAA;
+  border-color: #224 #446 #446 #224;
   color: #000;
-  background-color: #EEF;
+  background-color: #DDE;
 }
 
 .NEO .color_bk {
-  color: #999;
+  color: #434;
 }
 .NEO .color_bk2 {
-  color: #767;
+  color: #666;
 }
 .NEO .color_tool_icon {
   color: #445;
@@ -171,6 +171,6 @@ button {
 }
 
 .delfo th, .delfo td {
-  border-color: #AAF;
+  border-color: #224;
 }
 /*# sourceMappingURL=mono.css.map */

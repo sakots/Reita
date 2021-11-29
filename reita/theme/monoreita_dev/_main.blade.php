@@ -241,10 +241,6 @@
 					</form>
 					<form class="delf" action="{{$self}}" method="post">
 						<p>
-							<select name="delt">
-								<option value="1">レス</option>
-								<option value="0">親</option>
-							</select>
 							No <input class="form" type="number" min="1" name="delno" value="" autocomplete="off">
 							Pass <input class="form" type="password" name="pwd" value="" autocomplete="current-password">
 							<select class="form" name="mode">
