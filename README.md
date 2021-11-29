@@ -2,13 +2,13 @@
 
 Reitaは描画にReactを使ってやろうというお絵かき掲示板スクリプトです。 Reactの絵板(eita)なのでReitaです。
 
-![php](https://img.shields.io/badge/php->5.6-green.svg)
-![php](https://img.shields.io/badge/php-7.x-green.svg)
-![php](https://img.shields.io/badge/php-8.0-green.svg)
-![Last commit](https://img.shields.io/github/last-commit/sakots/Reita)
-![version](https://img.shields.io/github/v/release/sakots/Reita)
-![Downloads](https://img.shields.io/github/downloads/sakots/Reita/total)
-![Licence](https://img.shields.io/github/license/sakots/Reita)
+![php](https://img.shields.io/badge/php->5.6-green.svg "php 5.6-")
+![php](https://img.shields.io/badge/php-7.x-green.svg "php 7.x")
+![php](https://img.shields.io/badge/php-8.0-green.svg "php 8.0")
+![Last commit](https://img.shields.io/github/last-commit/sakots/Reita "Last commit")
+![version](https://img.shields.io/github/v/release/sakots/Reita "version")
+![Downloads](https://img.shields.io/github/downloads/sakots/Reita/total "Downloads")
+![Licence](https://img.shields.io/github/license/sakots/Reita "Licence MIT")
 
 [PaintBBS NEO](https://github.com/funige/neo/)、
 [ChickenPaint](https://github.com/thenickdude/chickenpaint/)
