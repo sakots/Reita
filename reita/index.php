@@ -5,7 +5,7 @@
 //--------------------------------------------------
 
 //スクリプトのバージョン
-define('REITA_VER','v0.0.0'); //lot.211127.0
+define('REITA_VER','v0.0.0'); //lot.211129.1
 
 //設定の読み込み
 require(__DIR__.'/config.php');
@@ -391,9 +391,6 @@ function regist() {
 			if ( $com  === "" ) $com  = DEF_COM;
 			if ( $sub  === "" ) $sub  = DEF_SUB;
 
-			$utime = time();
-			$tree = ($utime * 100);
-
 			// 二重投稿チェック
 			//最新コメント取得
 			$sqlw = "SELECT * FROM tlog WHERE thread=1 ORDER BY tid DESC LIMIT 1";
@@ -497,10 +494,15 @@ function regist() {
 			//パスワードが管理パスなら管理者バッジつける
 			$admins = $pwd === $admin_pass ? 1 : 0 ;
 
+			//age値取得
+			$sqlage = "SELECT MAX(age) FROM tlog";
+			$age = $db->exec("$sqlage");
+			$tree = time() * 100000000;
+
 			//スレ建て
-			$age = 0;
 			$thread = 1;
 			$shd = 0;
+			$age = 0;
 			$parent = NULL;
 			$sql = "INSERT INTO tlog (created, modified, thread, parent, comid, tree, a_name, sub, com, mail, a_url, picfile, pchfile, img_w, img_h, psec, utime, pwd, id, exid, age, invz, host, tool, admins, shd) VALUES (datetime('now', 'localtime'), datetime('now', 'localtime'), '$thread', '$parent', '$tree', '$tree', '$name', '$sub', '$com', '$mail', '$url', '$picfile', '$pchfile', '$img_w', '$img_h', '$psec', '$utime', '$pwdh', '$id', '$exid', '$age', '$invz', '$host', '$used_tool', '$admins', '$shd')";
 			$db->exec($sql);
@@ -617,6 +619,11 @@ function reply() {
 					$db = null; //db切断
 					error('二重投稿ですか？');
 				}
+			} else {
+				//最初のレスのage処理対策
+				$msgwc["tid"] = 0;
+				$msgwc["age"] = 0;
+				$msgwc["tree"] = 0;
 			}
 			//↑ 二重投稿チェックおわり
 
@@ -641,7 +648,7 @@ function reply() {
 			$admins = $pwd === $admin_pass ? 1 : 0 ;
 
 			//レスの位置
-			$tree = ($parent * 100) - (int)$msgwc["tid"];
+			$tree = time() - $parent - (int)$msgwc["tid"];
 			$comid = $tree + time();
 
 			//メール欄にsageが含まれるならageない
@@ -652,7 +659,7 @@ function reply() {
 			} else {
 				//age
 				$age ++;
-				$agetree = (int)$msgwc["tree"] + $age * time();
+				$agetree = $age + (time() * 100000000);
 				$sql_age = "UPDATE tlog SET age = $age, tree = $agetree WHERE tid = $parent";
 				$db->exec($sql_age);
 			}
@@ -1385,10 +1392,10 @@ function paintcom($tmpmode){
 			if(is_file(TEMP_DIR.$file_name.$imgext)) //画像があればリストに追加
 			//描画時間を$userdataをもとに計算
 			//(表示用)
-			$ptime = calcPtime((int)$postedtime - (int)$starttime);
+			$utime = calcPtime((int)$postedtime - (int)$starttime);
 			//描画時間(内部用)
-			$pptime = (int)$postedtime - (int)$starttime;
-			$tmplist[] = $ucode."\t".$uip."\t".$file_name.$imgext."\t".$ptime."\t".$pptime."\t".$tool;
+			$psec = (int)$postedtime - (int)$starttime;
+			$tmplist[] = $ucode."\t".$uip."\t".$file_name.$imgext."\t".$utime."\t".$psec."\t".$tool;
 
 		}
 	}
@@ -1397,7 +1404,7 @@ function paintcom($tmpmode){
 	if(count($tmplist)!=0){
 		//user-codeとipアドレスでチェック
 		foreach($tmplist as $tmpimg){
-			list($ucode,$uip,$ufilename,$ptime,$pptime,$tool) = explode("\t", $tmpimg);
+			list($ucode,$uip,$ufilename,$utime,$psec,$tool) = explode("\t", $tmpimg);
 			if($ucode == $usercode||$uip == $userip){
 				$tmp[] = $ufilename;
 			}
@@ -1419,9 +1426,9 @@ function paintcom($tmpmode){
 			$src = TEMP_DIR.$tmpfile;
 			$srcname = $tmpfile;
 			$date = gmdate("Y/m/d H:i", filemtime($src)+9*60*60);
-			$ptime = $ptime;
-			$pptime = $pptime;
-			$temp[] = compact('src','srcname','date','tool','ptime','pptime');
+			$utime = $utime;
+			$psec = $psec;
+			$temp[] = compact('src','srcname','date','tool','utime','psec');
 		}
 		$dat['temp'] = $temp;
 	}
