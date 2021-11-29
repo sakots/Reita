@@ -2,11 +2,13 @@
 
 Reitaは描画にReactを使ってやろうというお絵かき掲示板スクリプトです。 Reactの絵板(eita)なのでReitaです。
 
-[![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)]()
-[![composer](https://img.shields.io/badge/composer-%3E1.6-blue.svg)]()
-[![php](https://img.shields.io/badge/php->5.6-green.svg)]()
-[![php](https://img.shields.io/badge/php-7.x-green.svg)]()
-[![php](https://img.shields.io/badge/php-8.0-green.svg)]()
+![php](https://img.shields.io/badge/php->5.6-green.svg)
+![php](https://img.shields.io/badge/php-7.x-green.svg)
+![php](https://img.shields.io/badge/php-8.0-green.svg)
+![Last commit](https://img.shields.io/github/last-commit/sakots/Reita)
+![version](https://img.shields.io/github/v/release/sakots/Reita)
+![Downloads](https://img.shields.io/github/downloads/sakots/Reita/total)
+![Licence](https://img.shields.io/github/license/sakots/Reita)
 
 [PaintBBS NEO](https://github.com/funige/neo/)、
 [ChickenPaint](https://github.com/thenickdude/chickenpaint/)
