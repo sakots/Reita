@@ -2,6 +2,12 @@
 
 Reitaは描画にReactを使ってやろうというお絵かき掲示板スクリプトです。 Reactの絵板(eita)なのでReitaです。
 
+[![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)]()
+[![composer](https://img.shields.io/badge/composer-%3E1.6-blue.svg)]()
+[![php](https://img.shields.io/badge/php->5.6-green.svg)]()
+[![php](https://img.shields.io/badge/php-7.x-green.svg)]()
+[![php](https://img.shields.io/badge/php-8.0-green.svg)]()
+
 [PaintBBS NEO](https://github.com/funige/neo/)、
 [ChickenPaint](https://github.com/thenickdude/chickenpaint/)
 あたりが動けばいいかなと思う。
@@ -39,6 +45,12 @@ zennに記載しております。-> [Reactでお絵かき掲示板（の表示�
 再配布の際はどこかに私の名前を書いていただければと思います。
 
 ## 履歴
+
+### [2021/11/29]
+
+- テーマにCDNリンク埋め込む形にしようかなと
+- Reactにしやすくするため、まずデータベースの形を変更した
+- 「そろそろ消えます」はとりあえず要らない気がしたので予約だけして実装を消した
 
 ### [2021/11/10]
 
