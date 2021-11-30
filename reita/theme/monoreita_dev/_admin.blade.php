@@ -70,7 +70,7 @@
 							@foreach ($oya as $bbsline)
 								<tr>
 									<td>{{$bbsline['tid']}}</td>
-									<td>{{$bbsline['name']}}</td>
+									<td>{{$bbsline['a_name']}}</td>
 									<td>{{$bbsline['modified']}}</td>
 									<td>{!! mb_substr($bbsline['sub'], 0, 6)!!}</td>
 									<td>
@@ -84,10 +84,10 @@
 								</tr>
 								@if (!empty($ko))
 									@foreach ($ko as $res)
-										@if ($bbsline['tid'] == $res['tid'])
+										@if ($bbsline['tid'] == $res['parent'])
 											<tr>
-												<td>└{{$res['iid']}}</td>
-												<td>{{$res['name']}}</td>
+												<td>└{{$res['tid']}}</td>
+												<td>{{$res['a_name']}}</td>
 												<td>{{$res['modified']}}</td>
 												<td>{!! mb_substr($res['sub'], 0, 6)!!}</td>
 												<td>{{$res['picfile']}}</td>
