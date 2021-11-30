@@ -25,7 +25,7 @@ a:hover {
 
 hr {
   border-style: dashed;
-  border-color: #632;
+  border-color: #922;
 }
 
 header, .thread, footer {
@@ -33,7 +33,7 @@ header, .thread, footer {
 }
 
 header {
-  border-color: #632;
+  border-color: #922;
 }
 
 h1 a:visited {
@@ -44,7 +44,7 @@ h1 a:hover {
 }
 
 .thread, footer {
-  border-color: #632;
+  border-color: #922;
 }
 
 input, textarea {
@@ -84,7 +84,7 @@ figure {
 }
 
 .res {
-  border-color: #632;
+  border-color: #922;
 }
 
 .limit {
@@ -117,9 +117,9 @@ button {
 }
 
 .oyat {
-  border-color: #632;
-  background: -webkit-gradient(linear, left top, right top, from(#342), color-stop(#668844), to(#5e6633)) fixed;
-  background: linear-gradient(to right, #342, #668844, #5e6633) fixed;
+  border-color: #922;
+  background: -webkit-gradient(linear, left top, right top, from(#012), color-stop(#004488), to(#004755)) fixed;
+  background: linear-gradient(to right, #012, #004488, #004755) fixed;
   color: #DFE;
 }
 
@@ -130,10 +130,10 @@ button {
 }
 
 .NEO .color_bk {
-  color: #434;
+  color: #233;
 }
 .NEO .color_bk2 {
-  color: #666;
+  color: #555;
 }
 .NEO .color_tool_icon {
   color: #445;
