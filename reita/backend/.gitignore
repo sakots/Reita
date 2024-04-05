@@ -1,0 +1,9 @@
+*.db
+*.systemlog
+config.php
+
+*/cache
+*/session
+*/img
+*/tmp
+
