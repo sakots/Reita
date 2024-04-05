@@ -1,17 +1,16 @@
 # Reita
 
-Reitaは描画にReactを使ってやろうというお絵かき掲示板スクリプトです。 Reactの絵板(eita)なのでReitaです。
+Reitaは（昔一回諦めた）描画にReactを使ってやろうというお絵かき掲示板スクリプトです。 Reactの絵板(eita)なのでReitaです。
 
-![php](https://img.shields.io/badge/php->5.6-green.svg "php 5.6-")
-![php](https://img.shields.io/badge/php-7.x-green.svg "php 7.x")
-![php](https://img.shields.io/badge/php-8.0-green.svg "php 8.0")
+![php](https://img.shields.io/badge/php-7.4-green.svg "php 7.4")
+![php](https://img.shields.io/badge/php-8.x-green.svg "php 8.x")
 ![Last commit](https://img.shields.io/github/last-commit/sakots/Reita "Last commit")
 ![version](https://img.shields.io/github/v/release/sakots/Reita "version")
 ![Downloads](https://img.shields.io/github/downloads/sakots/Reita/total "Downloads")
 ![Licence](https://img.shields.io/github/license/sakots/Reita "Licence MIT")
 
 [PaintBBS NEO](https://github.com/funige/neo/)、
-[ChickenPaint](https://github.com/thenickdude/chickenpaint/)
+[ChickenPaint Be](https://github.com/satopian/ChickenPaint_Be)
 あたりが動けばいいかなと思う。
 
 ## 概要
@@ -20,7 +19,7 @@ zennに記載しております。-> [Reactでお絵かき掲示板（の表示�
 
 ### ビジョンとして
 
-- レンタルサーバーに設置できるようにしたいので、通信まわりはPHP
+- レンタルサーバーに設置できるようにしたいので、通信まわり、バックエンドはPHP
   - なかなかサーバーサイドでnode.jsが走ってるレンタルサーバーはないため。
 - データベースはSQLite
   - 手軽にレンタルサーバーに設置するため。
@@ -28,8 +27,6 @@ zennに記載しております。-> [Reactでお絵かき掲示板（の表示�
   - お絵描きのhtml5+javascript(jQuery)に干渉しないようにするため。絵がバグる原因がReactとかイヤでしょ。
 - サーバーのPHPはjsonを返す
   - 妥当。
-- 初期設定をwebブラウザ上でできるようにする
-  - 管理者パスワードも暗号化できる。初期設定用パスワードを設定し、それが一致すれば設定が開始できる形が妥当？
 
 ## サンプルとサポート
 
@@ -47,6 +44,11 @@ zennに記載しております。-> [Reactでお絵かき掲示板（の表示�
 再配布の際はどこかに私の名前を書いていただければと思います。
 
 ## 履歴
+
+### [2024/04/05]
+
+- 一旦リセット。ReactとTypescriptを勉強してきたので。
+- `backend`ディレクトリ作成。コンフィグと仮データベース作成。
 
 ### [2022/08/27]
 
