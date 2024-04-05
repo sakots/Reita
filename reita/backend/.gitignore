@@ -2,8 +2,8 @@
 *.systemlog
 config.php
 
-*/cache
-*/session
-*/img
-*/tmp
+/cache
+/session
+/img
+/tmp
 
