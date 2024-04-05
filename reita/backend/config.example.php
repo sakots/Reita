@@ -23,7 +23,7 @@ define('LOG_MAX_T', 300);
 //初期値は monoreita です。色選択のないmonorもあります。
 //define('THEME_DIR', 'monoreita');
 
-//設置URL phpのあるディレクトリの'/'まで
+//設置URL index.htmlのあるディレクトリの'/'まで
 //シェアボタンなどで使用
 define('BASE', 'https://example.com/reita/');
 
@@ -159,10 +159,10 @@ define('USER_DEL', 1);
 
 //複数のお絵描き掲示板を管理する際に便利です。
 
-//neoのディレクトリ。index.phpから見て
+//neoのディレクトリ。index.htmlから見て
 define('NEO_DIR', 'neo/');
 
-//chickenPaintのディレクトリ。index.phpから見て
+//chickenPaintのディレクトリ。index.htmlから見て
 define('CHICKEN_DIR', 'chickenpaint/');
 
 /* ---------- お絵かきアプレット設定(neo) ---------- */
@@ -190,7 +190,7 @@ define('C_SECURITY_TIMER', '');
 
 /* ---------- メイン設定 ---------- */
 
-//画像と動画データ保存ディレクトリ。index.phpから見て
+//画像と動画データ保存ディレクトリ。index.htmlから見て
 define('IMG_DIR', 'img/');
 
 //投稿容量制限 KB
