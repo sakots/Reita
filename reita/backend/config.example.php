@@ -23,9 +23,9 @@ define('LOG_MAX_T', 300);
 //初期値は monoreita です。色選択のないmonorもあります。
 //define('THEME_DIR', 'monoreita');
 
-//設置URL index.htmlのあるディレクトリの'/'まで
+//設置URL phpのあるディレクトリの'/'まで
 //シェアボタンなどで使用
-define('BASE', 'https://example.com/reita/');
+define('BASE', 'https://example.com/noreita/');
 
 //掲示板のタイトル（<title>とTOP）
 define('TITLE', 'お絵かき掲示板');
@@ -159,10 +159,10 @@ define('USER_DEL', 1);
 
 //複数のお絵描き掲示板を管理する際に便利です。
 
-//neoのディレクトリ。index.htmlから見て
+//neoのディレクトリ。index.phpから見て
 define('NEO_DIR', 'neo/');
 
-//chickenPaintのディレクトリ。index.htmlから見て
+//chickenPaintのディレクトリ。index.phpから見て
 define('CHICKEN_DIR', 'chickenpaint/');
 
 /* ---------- お絵かきアプレット設定(neo) ---------- */
@@ -190,8 +190,8 @@ define('C_SECURITY_TIMER', '');
 
 /* ---------- メイン設定 ---------- */
 
-//画像と動画データ保存ディレクトリ。index.htmlから見て
-define('IMG_DIR', 'img/');
+//画像と動画データ保存ディレクトリ。index.phpから見て
+define('IMG_DIR', 'src/');
 
 //投稿容量制限 KB
 define('MAX_KB', 2000);
@@ -336,4 +336,4 @@ define('PHP_SELF', 'index.php');
 
 /* ------------- コンフィグ互換性管理 ------------- */
 
-define('CONFIG_VER', 240405);
+define('CONF_VER', 240406);
