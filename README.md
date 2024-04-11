@@ -7,7 +7,7 @@ Reitaは（昔一回諦めた）描画にReactを使ってやろうというお�
 ![Last commit](https://img.shields.io/github/last-commit/sakots/Reita "Last commit")
 ![version](https://img.shields.io/github/v/release/sakots/Reita "version")
 ![Downloads](https://img.shields.io/github/downloads/sakots/Reita/total "Downloads")
-![Licence](https://img.shields.io/github/license/sakots/Reita "Licence MIT")
+![License](https://img.shields.io/github/license/sakots/Reita "License MIT")
 
 [PaintBBS NEO](https://github.com/funige/neo/)、
 [ChickenPaint Be](https://github.com/satopian/ChickenPaint_Be)
@@ -45,9 +45,13 @@ zennに記載しております。-> [Reactでお絵かき掲示板（の表示�
 
 ## 履歴
 
+### [2024/04/12]
+
+- Axios追加 `npm install axios`
+
 ### [2024/04/06]
 
-- フロントエンドをReact+Viteに
+- フロントエンドをReact+Viteに `npm create vite@latest`
 
 ### [2024/04/05]
 
