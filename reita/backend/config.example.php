@@ -18,11 +18,6 @@ $admin_name = '管理人';
 //古いスレッドから順番に消えます
 define('LOG_MAX_T', 300);
 
-//テーマ(テンプレート)のディレクトリ名。'/'は不要。
-//別のディレクトリにしたい場合は設定してください。
-//初期値は monoreita です。色選択のないmonorもあります。
-//define('THEME_DIR', 'monoreita');
-
 //設置URL phpのあるディレクトリの'/'まで
 //シェアボタンなどで使用
 define('BASE', 'https://example.com/noreita/');
@@ -336,4 +331,4 @@ define('PHP_SELF', 'index.php');
 
 /* ------------- コンフィグ互換性管理 ------------- */
 
-define('CONF_VER', 240406);
+define('CONFIG_VER', 240412);
