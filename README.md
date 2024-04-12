@@ -4,6 +4,7 @@ Reitaは（昔一回諦めた）描画にReactを使ってやろうというお�
 
 ![php](https://img.shields.io/badge/php-7.4-green.svg "php 7.4")
 ![php](https://img.shields.io/badge/php-8.x-green.svg "php 8.x")
+
 ![Last commit](https://img.shields.io/github/last-commit/sakots/Reita "Last commit")
 ![version](https://img.shields.io/github/v/release/sakots/Reita "version")
 ![Downloads](https://img.shields.io/github/downloads/sakots/Reita/total "Downloads")
@@ -42,6 +43,10 @@ zennに記載しております。-> [Reactでお絵かき掲示板（の表示�
 パレットデータの再配布等自由にしていただいて構いません。
 ただの文字列なので著作権の主張はしませんが、書くのにそれなりの苦労はしましたので、
 再配布の際はどこかに私の名前を書いていただければと思います。
+
+## License
+
+Reitaのオリジナルのコードは MIT License により提供されます。 バンドルされた第三者によるソフトウェアやファイルについては、それぞれのライセンスにより提供されます。
 
 ## 履歴
 
