@@ -18,9 +18,9 @@ $admin_name = '管理人';
 //古いスレッドから順番に消えます
 define('LOG_MAX_T', 300);
 
-//設置URL phpのあるディレクトリの'/'まで
+//設置URL indexのあるディレクトリの'/'まで
 //シェアボタンなどで使用
-define('BASE', 'https://example.com/noreita/');
+define('BASE', 'https://example.com/reita/');
 
 //掲示板のタイトル（<title>とTOP）
 define('TITLE', 'お絵かき掲示板');
@@ -154,10 +154,10 @@ define('USER_DEL', 1);
 
 //複数のお絵描き掲示板を管理する際に便利です。
 
-//neoのディレクトリ。index.phpから見て
+//neoのディレクトリ。index.htmlから見て
 define('NEO_DIR', 'neo/');
 
-//chickenPaintのディレクトリ。index.phpから見て
+//chickenPaintのディレクトリ。index.htmlから見て
 define('CHICKEN_DIR', 'chickenpaint/');
 
 /* ---------- お絵かきアプレット設定(neo) ---------- */
@@ -324,10 +324,6 @@ define('PERMISSION_FOR_DIR', 0707); //初期値 0707
 //csrfトークンを使って不正な投稿を拒絶する する:1 しない:0
 //する:1 にすると外部サイトからの不正な投稿を拒絶することができます
 define('CHECK_CSRF_TOKEN', 1);
-
-/* ------------- できれば変更してほしくないところ ------------- */
-//スクリプト名
-define('PHP_SELF', 'index.php');
 
 /* ------------- コンフィグ互換性管理 ------------- */
 
