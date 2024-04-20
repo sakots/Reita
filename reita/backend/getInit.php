@@ -67,13 +67,16 @@ try {
 if (!is_writable(realpath("./"))) {
 	$init = array_merge($init, ["directoryWriteError" => "カレントディレクトリに書けません<br>"] );
 }
+
+$error = "";
+
 if (!is_dir(IMG_DIR)) {
 	mkdir(IMG_DIR, PERMISSION_FOR_DIR);
 	chmod(IMG_DIR, PERMISSION_FOR_DIR);
 }
-if (!is_dir(IMG_DIR)) $err .= IMG_DIR . "がありません<br>";
-if (!is_writable(IMG_DIR)) $err .= IMG_DIR . "を書けません<br>";
-if (!is_readable(IMG_DIR)) $err .= IMG_DIR . "を読めません<br>";
+if (!is_dir(IMG_DIR)) $error .= IMG_DIR . "がありません<br>";
+if (!is_writable(IMG_DIR)) $error .= IMG_DIR . "を書けません<br>";
+if (!is_readable(IMG_DIR)) $error .= IMG_DIR . "を読めません<br>";
 
 if (!is_dir(TEMP_DIR)) {
 	mkdir(TEMP_DIR, PERMISSION_FOR_DIR);
@@ -83,10 +86,10 @@ if (!is_dir(__DIR__ . '/session/')) {
 	mkdir(__DIR__ . '/session/', PERMISSION_FOR_DIR);
 	chmod(__DIR__ . '/session/', PERMISSION_FOR_DIR);
 }
-if (!is_dir(TEMP_DIR)) $err .= TEMP_DIR . "がありません<br>";
-if (!is_writable(TEMP_DIR)) $err .= TEMP_DIR . "を書けません<br>";
-if (!is_readable(TEMP_DIR)) $err .= TEMP_DIR . "を読めません<br>";
-if ($err) {
+if (!is_dir(TEMP_DIR)) $error .= TEMP_DIR . "がありません<br>";
+if (!is_writable(TEMP_DIR)) $error .= TEMP_DIR . "を書けません<br>";
+if (!is_readable(TEMP_DIR)) $error .= TEMP_DIR . "を読めません<br>";
+if ($error) {
 	$init = array_merge($init, ["directoryError" => $err]);
 }
 
