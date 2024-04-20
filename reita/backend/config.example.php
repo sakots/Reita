@@ -256,6 +256,9 @@ define('USE_RE_SUBJECT', 1);
 //ハッシュタグリンク機能を使う 使う:1 使わない:0
 define('USE_HASHTAG', 1);
 
+//編集マーク
+define('UPDATE_MARK', '*');
+
 //フォーム下の追加お知らせ <li></li>で囲まれます。
 //(例) $addInfo = array('まだまだ開発中…','バグがあったら教えてね');
 //設定しないなら $addInfo = array(''); で
@@ -281,7 +284,7 @@ define('PAINT_DEF_W', 400);  //幅
 define('PAINT_DEF_H', 400);  //高さ
 
 //描画時間の表示 する:1 しない:0
-define('DSP_PAINT_TIME', 1);
+define('DISPLAY_PAINT_TIME', 1);
 
 //パレットデータファイル名
 define('PALETTE_FILE', 'palette.txt');
