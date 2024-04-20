@@ -7,13 +7,20 @@
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: Content-Type');
 
-
 //スクリプトのバージョン
 define('REITA_VER', 'v0.0.0'); //lot.240412.0
 
 //設定の読み込み
 require(__DIR__ . '/config.php');
 
+//BladeOne v4.12
+include(__DIR__ . '/BladeOne/lib/BladeOne.php');
+
+use eftec\bladeone\BladeOne;
+$views = __DIR__ . '/theme/'; // テンプレートフォルダ
+$cache = __DIR__ . '/cache'; // キャッシュフォルダ
+
 //タイムゾーン設定
 date_default_timezone_set(DEFAULT_TIMEZONE);
+
 
