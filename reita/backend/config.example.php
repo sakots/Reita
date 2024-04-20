@@ -266,7 +266,7 @@ $addInfo = array('<a href="https://github.com/sakots/Reita">ソースはこち�
 //お絵かき機能を使用する お絵かきのみ
 
 //一時ファイルディレクトリ
-define('TEMP_DIR', 'backend/tmp/');
+define('TEMP_DIR', 'temp/');
 
 //一時ファイルディレクトリ内のファイル有効期限(日数)
 define('TEMP_LIMIT', 14);
