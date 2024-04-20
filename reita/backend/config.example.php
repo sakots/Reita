@@ -8,11 +8,11 @@
 /* ---------- 最初に設定する項目 ---------- */
 //管理者パスワード
 //必ず変更してください ! admin のままではプログラムは動作しません !
-$admin_pass = 'admin';
+$adminPass = 'admin';
 
 //管理者名
 //投稿の際に名前がこれでパスワードが管理パスのときに、名前のあとに管理者マークが付きます
-$admin_name = '管理人';
+$adminName = '管理人';
 
 //最大スレッド数
 //古いスレッドから順番に消えます
@@ -266,7 +266,7 @@ $addInfo = array('<a href="https://github.com/sakots/Reita">ソースはこち�
 //お絵かき機能を使用する お絵かきのみ
 
 //一時ファイルディレクトリ
-define('TEMP_DIR', 'tmp/');
+define('TEMP_DIR', 'backend/tmp/');
 
 //一時ファイルディレクトリ内のファイル有効期限(日数)
 define('TEMP_LIMIT', 14);
