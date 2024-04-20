@@ -41,12 +41,9 @@ if ($adminPass === 'admin') {
 
 $initData = json_encode($init, JSON_UNESCAPED_UNICODE);
 
-var_dump($initData);
-
 //キャッシュフォルダがなかったら作成
 if (!file_exists($cache)) {
 	mkdir($cache, PERMISSION_FOR_DIR);
 }
 
-$blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO); // MODE_DEBUGだと開発モード MODE_AUTOが速い。
-$blade->pipeEnable = true; // パイプのフィルターを使えるようにする
+print $initData;
