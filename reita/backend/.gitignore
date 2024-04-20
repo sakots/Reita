@@ -1,6 +1,6 @@
 *.db
 *.systemlog
-config.php
+/config.php
 
 /cache
 /session
