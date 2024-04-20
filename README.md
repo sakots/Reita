@@ -54,10 +54,11 @@ Reitaのオリジナルのコードは MIT License により提供されます�
 
 - フロントエンドディレクトリ作成
 - 初期画面のバックエンドができた
+- フロントエンドにreact-router-dom追加 `npm install react-router-dom`
 
 ### [2024/04/12]
 
-- Axios追加 `npm install axios`
+- フロントエンドにAxios追加 `npm install axios`
 
 ### [2024/04/06]
 
