@@ -60,7 +60,7 @@ $config['maxCommentLength'] = MAX_COM;
 $config['useChicken'] = USE_CHICKENPAINT;
 
 $config['selectPalettes'] = USE_SELECT_PALETTES;
-$config['palletsDat'] = $palletsData;
+$config['palletsData'] = $palletsData;
 
 $config['displayId'] = DISPLAY_ID;
 $config['updateMark'] = UPDATE_MARK;
