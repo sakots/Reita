@@ -186,7 +186,7 @@ define('C_SECURITY_TIMER', '');
 /* ---------- メイン設定 ---------- */
 
 //画像と動画データ保存ディレクトリ。index.phpから見て
-define('IMG_DIR', 'src/');
+define('IMG_DIR', 'img/');
 
 //投稿容量制限 KB
 define('MAX_KB', 2000);
@@ -291,7 +291,7 @@ define('PALETTE_FILE', 'palette.txt');
 define('USE_SELECT_PALETTES', 1);
 
 //パレットデータファイル切り替え機能を使用する する:1 の時のパレットデーターファイル名
-$pallets_dat = array(['標準', 'palette.txt'], ['PCCS_HSL', 'p_PCCS.txt'], ['マンセルHV/C', 'p_munsellHVC.txt']);
+$palletsData = array(['標準', 'palette.txt'], ['PCCS_HSL', 'p_PCCS.txt'], ['マンセルHV/C', 'p_munsellHVC.txt']);
 
 //動画機能を使用する する:1 しない:0
 define('USE_ANIME', 1);
