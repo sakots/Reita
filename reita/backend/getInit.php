@@ -29,13 +29,13 @@ if (($phpVersion = phpversion()) < "7.3.0") {
 }
 //コンフィグのバージョンが古くて互換性がない場合動かさせない
 if (CONFIG_VER < 240406 ) {
-	$configErrorString = ["configError" => "コンフィグファイルに互換性がないようです。再設定をお願いします。<br>\n The configuration file is incompatible. Please reconfigure it."];
+	$configErrorString = ["configError" => "コンフィグファイルに互換性がないようです。再設定をお願いします。<br>\n The configuration file is incompatible. Please reconfigure it.<br>\n"];
 	$init = array_merge($init, $configErrorString);
 }
 
 //管理パスが初期値(admin)の場合は動作させない
 if ($adminPass === 'admin') {
-	$adminPassErrorString = ["adminPassError" => "管理パスが初期設定値のままです！危険なので動かせません。<br>\n The admin pass is still at its default value! This program can't run it until you fix it."];
+	$adminPassErrorString = ["adminPassError" => "管理パスが初期設定値のままです！危険なので動かせません。<br>\n The admin pass is still at its default value! This program can't run it until you fix it.<br>\n"];
 	$init = array_merge($init, $adminPassErrorString);
 }
 
