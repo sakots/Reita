@@ -46,4 +46,6 @@ if (!file_exists($cache)) {
 	mkdir($cache, PERMISSION_FOR_DIR);
 }
 
-print $initData;
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
+echo($initData);
