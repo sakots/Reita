@@ -17,13 +17,13 @@ $init = [];
 
 //phpのバージョンが古い場合動かさせない
 if (($phpVersion = phpversion()) < "7.3.0") {
-	$phpVersionString = "PHP version 7.3 or higher is required for this program to work. <br>\n(Current PHP version:".$phpVersion;
-	$init = array_push($init, $phpVersionString);
+	$phpErrorString = "PHP version 7.3 or higher is required for this program to work. <br>\n(Current PHP version:".$phpVersion;
+	$init = array_push($init, $phpErrorString);
 }
 //コンフィグのバージョンが古くて互換性がない場合動かさせない
 if (CONFIG_VER < 240406 ) {
-	$configVersionString = "コンフィグファイルに互換性がないようです。再設定をお願いします。<br>\n The configuration file is incompatible. Please reconfigure it.";
-	$init = array_push($init, $configVersionString);
+	$configErrorString = "コンフィグファイルに互換性がないようです。再設定をお願いします。<br>\n The configuration file is incompatible. Please reconfigure it.";
+	$init = array_push($init, $configErrorString);
 }
 
 //管理パスが初期値(admin)の場合は動作させない
