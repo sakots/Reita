@@ -17,9 +17,6 @@ use eftec\bladeone\BladeOne;
 $views = __DIR__ . '/theme/'; // テンプレートフォルダ
 $cache = __DIR__ . '/cache'; // キャッシュフォルダ
 
-//タイムゾーン設定
-date_default_timezone_set(DEFAULT_TIMEZONE);
-
 $init = [];
 
 //phpのバージョンが古い場合動かさせない
@@ -33,7 +30,7 @@ if (CONFIG_VER < 240406 ) {
 	$init = array_merge($init, $configErrorString);
 }
 
-//管理パスが初期値(admin)の場合は動作させない
+//管理パスが初期値(admin)の場合は動作させない(?)
 if ($adminPass === 'admin') {
 	$adminPassErrorString = ["adminPassError" => "管理パスが初期設定値のままです！危険なので動かせません。<br>\n The admin pass is still at its default value! This program can't run it until you fix it.<br>\n"];
 	$init = array_merge($init, $adminPassErrorString);
