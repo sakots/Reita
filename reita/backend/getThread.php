@@ -50,10 +50,10 @@ function logDelete()
 
 		//レスあれば削除
 		//カウント
-		$sql = "SELECT COUNT(*) as cnt FROM tlog WHERE parent = $del_tid";
+		$sql = "SELECT COUNT(*) as count FROM tlog WHERE parent = $del_tid";
 		$countRes = $db->query("$sql");
 		$countRes = $countRes->fetch();
-		$logCount = $countRes["cnt"];
+		$logCount = $countRes["count"];
 		//削除
 		if ($logCount !== 0) {
 			$delRes = "DELETE FROM tlog WHERE parent = $del_tid";
@@ -239,7 +239,7 @@ try {
       //日付をUNIX時間に変換して設定どおりにフォーマット
       $res['created'] = date(DATE_FORMAT, strtotime($res['created']));
       $res['modified'] = date(DATE_FORMAT, strtotime($res['modified']));
-      $ko[] = $res;
+      $oya[$i][] = $res;
       $j++;
     }
     // http、https以外のURLの場合表示しない
@@ -270,7 +270,6 @@ try {
     $i++;
   }
 
-  $threads['ko'] = $ko;
   $threads['oya'] = $oya;
   $threads['dsp_res'] = DSP_RES;
   $threads['path'] = IMG_DIR;
