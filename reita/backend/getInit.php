@@ -90,6 +90,8 @@ if ($error) {
 	$init = array_merge($init, ["directoryError" => $err]);
 }
 
+//書き出し
+
 $initData = json_encode($init, JSON_UNESCAPED_UNICODE);
 
 header("Access-Control-Allow-Origin: *");
