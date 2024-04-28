@@ -1,23 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import axios from 'axios'
+import Home from './pages/Home'
+import Catalog from './pages/Catalog'
+import Reply from './pages/Reply'
+import Searches from './pages/Searches'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const boardDataURL = "https://localhost/dev/Reita/reita/backend/getConfig.php"
+
+const App = () => {
+
+  const [boardData, setBoardData] = useState("")
+  useEffect(() => {
+    axios.get(boardDataURL).then((response) => {
+      setBoardData(response.data);
+    });
+  }, []);
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{boardData.boardTitle}</h1>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path='catalog' element={<Catalog />} />
+        <Route path='Reply' element={<Reply />} />
+        <Route path='searches' element={<Searches />} />
+        <Route path='*' element={<h2>ページがないよ</h2>} />
+      </Routes>
     </>
   )
 }
