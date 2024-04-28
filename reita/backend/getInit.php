@@ -10,30 +10,30 @@ header('Access-Control-Allow-Headers: Content-Type');
 //設定の読み込み
 require(__DIR__ . '/config.php');
 
-//BladeOne v4.12
-include(__DIR__ . '/BladeOne/lib/BladeOne.php');
-
-use eftec\bladeone\BladeOne;
-$views = __DIR__ . '/theme/'; // テンプレートフォルダ
 $cache = __DIR__ . '/cache'; // キャッシュフォルダ
 
 $init = [];
+$init["error"] = "";
+$init["flag"] = false;
 
 //phpのバージョンが古い場合動かさせない
 if (($phpVersion = phpversion()) < "7.3.0") {
-	$phpErrorString = ["phpError" => "PHP version 7.3 or higher is required for this program to work. <br>\n(Current PHP version:".$phpVersion];
-	$init = array_merge($init, $phpErrorString);
+	$phpErrorString = "PHP version 7.3 or higher is required for this program to work. \n(Current PHP version:".$phpVersion ."\n";
+	$init["error"] .= $phpErrorString;
+	$init["flag"] = true;
 }
 //コンフィグのバージョンが古くて互換性がない場合動かさせない
 if (CONFIG_VER < 240406 ) {
-	$configErrorString = ["configError" => "コンフィグファイルに互換性がないようです。再設定をお願いします。<br>\n The configuration file is incompatible. Please reconfigure it.<br>\n"];
-	$init = array_merge($init, $configErrorString);
+	$configErrorString = "コンフィグファイルに互換性がないようです。再設定をお願いします。\n The configuration file is incompatible. Please reconfigure it.\n";
+	$init["error"] .= $configErrorString;
+	$init["flag"] = true;
 }
 
 //管理パスが初期値(admin)の場合は動作させない(?)
 if ($adminPass === 'admin') {
-	$adminPassErrorString = ["adminPassError" => "管理パスが初期設定値のままです！危険なので動かせません。<br>\n The admin pass is still at its default value! This program can't run it until you fix it.<br>\n"];
-	$init = array_merge($init, $adminPassErrorString);
+	$adminPassErrorString = "管理パスが初期設定値のままです！危険なので動かせません。\n The admin pass is still at its default value! This program can't run it until you fix it.\n";
+	$init["error"] .= $adminPassErrorString;
+	$init["flag"] = true;
 }
 
 //キャッシュフォルダがなかったら作成
@@ -58,11 +58,13 @@ try {
 		$db = null; //db切断
 	}
 } catch (PDOException $e) {
-	$init = array_merge($init, ["databaseError" => "DB接続エラー:".$e->getMessage()]);
+	$init["error"] .= "DB接続エラー:".$e->getMessage();
+	$init["flag"] = true;
 }
 
 if (!is_writable(realpath("./"))) {
-	$init = array_merge($init, ["directoryWriteError" => "カレントディレクトリに書けません<br>\n"] );
+	$init["error"] .= "カレントディレクトリに書けません\n";
+	$init["flag"] = true;
 }
 
 $error = "";
@@ -71,9 +73,9 @@ if (!is_dir(IMG_DIR)) {
 	mkdir(IMG_DIR, PERMISSION_FOR_DIR);
 	chmod(IMG_DIR, PERMISSION_FOR_DIR);
 }
-if (!is_dir(IMG_DIR)) $error .= IMG_DIR . "がありません<br>\n";
-if (!is_writable(IMG_DIR)) $error .= IMG_DIR . "を書けません<br>\n";
-if (!is_readable(IMG_DIR)) $error .= IMG_DIR . "を読めません<br>\n";
+if (!is_dir(IMG_DIR)) $error .= IMG_DIR . "がありません\n";
+if (!is_writable(IMG_DIR)) $error .= IMG_DIR . "を書けません\n";
+if (!is_readable(IMG_DIR)) $error .= IMG_DIR . "を読めません\n";
 
 if (!is_dir(TEMP_DIR)) {
 	mkdir(TEMP_DIR, PERMISSION_FOR_DIR);
@@ -83,11 +85,12 @@ if (!is_dir(__DIR__ . '/session/')) {
 	mkdir(__DIR__ . '/session/', PERMISSION_FOR_DIR);
 	chmod(__DIR__ . '/session/', PERMISSION_FOR_DIR);
 }
-if (!is_dir(TEMP_DIR)) $error .= TEMP_DIR . "がありません<br>\n";
-if (!is_writable(TEMP_DIR)) $error .= TEMP_DIR . "を書けません<br>\n";
-if (!is_readable(TEMP_DIR)) $error .= TEMP_DIR . "を読めません<br>\n";
+if (!is_dir(TEMP_DIR)) $error .= TEMP_DIR . "がありません\n";
+if (!is_writable(TEMP_DIR)) $error .= TEMP_DIR . "を書けません\n";
+if (!is_readable(TEMP_DIR)) $error .= TEMP_DIR . "を読めません\n";
 if ($error) {
-	$init = array_merge($init, ["directoryError" => $err]);
+	$init["error"] .= $err;
+	$init["flag"] = true;
 }
 
 //書き出し
