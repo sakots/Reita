@@ -208,9 +208,9 @@ try {
         $bbsLine['ressu'] = $j; //スレのレス数
         $bbsLine['res_d_su'] = $j - DSP_RES; //スレのレス省略数
         if ($j > DSP_RES) { //スレのレス数が規定より多いと
-          $bbsline['rflag'] = true; //省略フラグtrue
+          $bbsLine['rflag'] = true; //省略フラグtrue
         } else {
-          $bbsline['rflag'] = false; //省略フラグfalse
+          $bbsLine['rflag'] = false; //省略フラグfalse
         }
         $flag = false;
         break;
@@ -243,7 +243,7 @@ try {
       $j++;
     }
     // http、https以外のURLの場合表示しない
-    if (!filter_var($bbsLine['a_url'], FILTER_VALIDATE_URL) || !preg_match('|^https?://.*$|', $bbsline['a_url'])) {
+    if (!filter_var($bbsLine['a_url'], FILTER_VALIDATE_URL) || !preg_match('|^https?://.*$|', $bbsLine['a_url'])) {
       $bbsLine['a_url'] = "";
     }
     $bbsLine['com'] = htmlspecialchars($bbsLine['com'], ENT_QUOTES | ENT_HTML5);
