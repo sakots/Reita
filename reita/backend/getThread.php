@@ -233,7 +233,7 @@ try {
       //空行を縮める
       $res['com'] = preg_replace('/(\n|\r|\r\n|\n\r){3,}/us', "\n\n", $res['com']);
       //<br>に
-      $res['com'] = nl2br($res['com'], false);;
+      //$res['com'] = nl2br($res['com'], false);;
       //引用の色
       $res['com'] = quote($res['com']);
       //日付をUNIX時間に変換して設定どおりにフォーマット
@@ -259,7 +259,7 @@ try {
     //空行を縮める
     $bbsLine['com'] = preg_replace('/(\n|\r|\r\n){3,}/us', "\n\n", $bbsLine['com']);
     //<br>に
-    $bbsLine['com'] = nl2br($bbsLine['com'], false);
+    //$bbsLine['com'] = nl2br($bbsLine['com'], false);
     //引用の色
     $bbsLine['com'] = quote($bbsLine['com']);
     //日付をUNIX時間にしたあと整形
