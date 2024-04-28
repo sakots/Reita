@@ -4,9 +4,6 @@
 //  by sakots https://oekakibbs.moe/
 //--------------------------------------------------
 
-header("Access-Control-Allow-Origin: *");
-header('Access-Control-Allow-Headers: Content-Type');
-
 //スクリプトのバージョン
 define('REITA_VER', 'v0.0.0'); //lot.240412.0
 
@@ -88,5 +85,6 @@ $config['useHashtag'] = USE_HASHTAG;
 $configData = json_encode($config, JSON_UNESCAPED_UNICODE);
 
 header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 echo($configData);
