@@ -28,7 +28,7 @@ define('TITLE', 'お絵かき掲示板');
 //「ホーム」へのリンク
 // 自分のサイトにお絵かき掲示板がある、という慣習からのものです。
 // 自分のサイトのURL（絶対パスも可）をどうぞ。
-define('HOME', '../');
+define('HOME', '../../');
 
 // ChickenPaintを使う 使う:1 使わない:0
 define('USE_CHICKENPAINT', 1);
@@ -154,11 +154,11 @@ define('USER_DEL', 1);
 
 //複数のお絵描き掲示板を管理する際に便利です。
 
-//neoのディレクトリ。index.htmlから見て
-define('NEO_DIR', 'neo/');
+//neoのディレクトリ。
+define('NEO_DIR', '../backend/neo/');
 
-//chickenPaintのディレクトリ。index.htmlから見て
-define('CHICKEN_DIR', 'chickenpaint/');
+//chickenPaintのディレクトリ。
+define('CHICKEN_DIR', '../backend/chickenpaint/');
 
 /* ---------- お絵かきアプレット設定(neo) ---------- */
 
@@ -175,7 +175,7 @@ define('SECURITY_CLICK', '');
 //セキュリティタイマー(単位:秒)。設定しないなら''で
 define('SECURITY_TIMER', '');
 //セキュリティにヒットした場合の飛び先
-define('SECURITY_URL', './security_c.html');
+define('SECURITY_URL', '../backend/security_c.html');
 
 //続きを描くときのセキュリティ。利用しないなら両方''で
 //続きを描くときのセキュリティクリック数。設定しないなら''で
@@ -186,7 +186,7 @@ define('C_SECURITY_TIMER', '');
 /* ---------- メイン設定 ---------- */
 
 //画像と動画データ保存ディレクトリ。index.phpから見て
-define('IMG_DIR', 'img/');
+define('IMG_DIR', '../backend/img/');
 
 //投稿容量制限 KB
 define('MAX_KB', 2000);
