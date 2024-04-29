@@ -12,8 +12,6 @@ const Header = () => {
     });
   }, []);
 
-  console.log(boardData)
-
   return (
     <h1>{boardData.boardTitle}</h1>
   )
