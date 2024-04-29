@@ -14,7 +14,22 @@ const Header = () => {
 
   return (
     <div>
-      <h1>{boardData.boardTitle}</h1>
+      <h1><a href="./">{boardData.boardTitle}</a></h1>
+      <div>
+        <a href={boardData.home} target="_top">[ホーム]</a>
+        <a href="../backend/admin_in.php">[管理モード]</a>
+      </div>
+      <hr />
+      <div>
+        <section>
+          <p className="top menu">
+            <a href="/">[標準モード]</a>
+            <a href="/catalog">[カタログ]</a>
+            <a href="../backend/picTemp.php">[投稿途中の絵]</a>
+            <a href="#footer">[↓]</a>
+          </p>
+        </section>
+      </div>
     </div>
   )
 }
