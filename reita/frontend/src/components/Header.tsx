@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const boardDataURL = "https://localhost/dev/Reita/reita/backend/getConfig.php"
+const boardDataURL = import.meta.env.VITE_GET_CONFIG_URL
 
 const Header = () => {
 
@@ -13,7 +13,9 @@ const Header = () => {
   }, []);
 
   return (
-    <h1>{boardData.boardTitle}</h1>
+    <div>
+      <h1>{boardData.boardTitle}</h1>
+    </div>
   )
 }
 

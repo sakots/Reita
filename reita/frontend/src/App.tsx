@@ -9,7 +9,7 @@ import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-const initDataURL = "https://localhost/dev/Reita/reita/backend/getInit.php"
+const initDataURL = import.meta.env.VITE_GET_INIT_URL
 
 const App = () => {
   const [initData, setInitData] = useState("")
