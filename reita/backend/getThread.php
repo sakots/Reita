@@ -80,28 +80,6 @@ function quote($quote)
 	return $quote;
 }
 
-/* オートリンク */
-function auto_link($proto)
-{
-	if (!(stripos($proto, "script") !== false)) { //scriptがなければ続行
-		$pattern = "{(https?|ftp)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)}";
-		$replace = "<a href=\"\\1\\2\" target=\"_blank\" rel=\"nofollow noopener noreferrer\">\\1\\2</a>";
-		$proto = preg_replace($pattern, $replace, $proto);
-		return $proto;
-	} else {
-		return $proto;
-	}
-}
-
-/* ハッシュタグリンク */
-function hashtag_link($hashtag)
-{
-	$pattern = "/(?:^|[^ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9&_\/]+)[#＃]([ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*[ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z]+[ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*)/u";
-	$replace = " <a href=\"search.php&amp;tag=tag&amp;search=\\1\">#\\1</a>";
-	$hashtag = preg_replace($pattern, $replace, $hashtag);
-	return $hashtag;
-}
-
 $threads = [];
 
 //ログ行数オーバー処理
@@ -208,9 +186,9 @@ try {
         $bbsLine['ressu'] = $j; //スレのレス数
         $bbsLine['res_d_su'] = $j - DSP_RES; //スレのレス省略数
         if ($j > DSP_RES) { //スレのレス数が規定より多いと
-          $bbsline['rflag'] = true; //省略フラグtrue
+          $bbsLine['rflag'] = true; //省略フラグtrue
         } else {
-          $bbsline['rflag'] = false; //省略フラグfalse
+          $bbsLine['rflag'] = false; //省略フラグfalse
         }
         $flag = false;
         break;
@@ -222,18 +200,10 @@ try {
       }
       $res['com'] = htmlspecialchars($res['com'], ENT_QUOTES | ENT_HTML5);
 
-      //オートリンク
-      if (AUTOLINK) {
-        $res['com'] = auto_link($res['com']);
-      }
-      //ハッシュタグ
-      if (USE_HASHTAG) {
-        $res['com'] = hashtag_link($res['com']);
-      }
       //空行を縮める
       $res['com'] = preg_replace('/(\n|\r|\r\n|\n\r){3,}/us', "\n\n", $res['com']);
       //<br>に
-      $res['com'] = nl2br($res['com'], false);;
+      //$res['com'] = nl2br($res['com'], false);;
       //引用の色
       $res['com'] = quote($res['com']);
       //日付をUNIX時間に変換して設定どおりにフォーマット
@@ -243,23 +213,15 @@ try {
       $j++;
     }
     // http、https以外のURLの場合表示しない
-    if (!filter_var($bbsLine['a_url'], FILTER_VALIDATE_URL) || !preg_match('|^https?://.*$|', $bbsline['a_url'])) {
+    if (!filter_var($bbsLine['a_url'], FILTER_VALIDATE_URL) || !preg_match('|^https?://.*$|', $bbsLine['a_url'])) {
       $bbsLine['a_url'] = "";
     }
     $bbsLine['com'] = htmlspecialchars($bbsLine['com'], ENT_QUOTES | ENT_HTML5);
 
-    //オートリンク
-    if (AUTOLINK) {
-      $bbsLine['com'] = auto_link($bbsLine['com']);
-    }
-    //ハッシュタグ
-    if (USE_HASHTAG) {
-      $bbsLine['com'] = hashtag_link($bbsLine['com']);
-    }
     //空行を縮める
     $bbsLine['com'] = preg_replace('/(\n|\r|\r\n){3,}/us', "\n\n", $bbsLine['com']);
     //<br>に
-    $bbsLine['com'] = nl2br($bbsLine['com'], false);
+    //$bbsLine['com'] = nl2br($bbsLine['com'], false);
     //引用の色
     $bbsLine['com'] = quote($bbsLine['com']);
     //日付をUNIX時間にしたあと整形

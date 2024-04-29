@@ -58,7 +58,7 @@ try {
 		$db = null; //db切断
 	}
 } catch (PDOException $e) {
-	$init["error"] .= "DB接続エラー:".$e->getMessage();
+	$init["error"] .= "DB接続エラー:".$e->getMessage()."\n";
 	$init["flag"] = true;
 }
 
