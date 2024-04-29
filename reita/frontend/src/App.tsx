@@ -6,9 +6,10 @@ import Catalog from './pages/Catalog'
 import Reply from './pages/Reply'
 import Searches from './pages/Searches'
 import './App.css'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
-const initDataURL = "https://localhost/dev/Reita/reita/backend/getInit.php"
-const boardDataURL = "https://localhost/dev/Reita/reita/backend/getConfig.php"
+const initDataURL = import.meta.env.VITE_GET_INIT_URL
 
 const App = () => {
   const [initData, setInitData] = useState("")
@@ -17,17 +18,11 @@ const App = () => {
       setInitData(response.data);
     });
   }, []);
-  const [boardData, setBoardData] = useState("")
-  useEffect(() => {
-    axios.get(boardDataURL).then((response) => {
-      setBoardData(response.data);
-    });
-  }, []);
 
   if (initData.flag === false) {
     return (
       <>
-        <h1>{boardData.boardTitle}</h1>
+        <Header />
         <Routes>
           <Route index element={<Home />} />
           <Route path='catalog' element={<Catalog />} />
@@ -35,6 +30,7 @@ const App = () => {
           <Route path='searches' element={<Searches />} />
           <Route path='*' element={<h2>ページがないよ</h2>} />
         </Routes>
+        <Footer />
       </>
     )
   } else {
