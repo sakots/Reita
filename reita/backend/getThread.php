@@ -130,17 +130,15 @@ try {
   $threads['maxPage'] = $maxPage;
 
   //リンク作成用
-  $threads['nowPage'] = $page;
+  $threads['nowPage'] = (int)$page;
   $p = 1;
   $pp = array();
   $paging = array();
   while ($p <= $maxPage) {
-    $paging[($p)] = compact('p');
-    $pp[] = $paging;
+    $paging[] = $p;
     $p++;
   }
   $threads['paging'] = $paging;
-  $threads['pp'] = $pp;
 
   $threads['back'] = ($page - 1);
   $threads['next'] = ($page + 1);
