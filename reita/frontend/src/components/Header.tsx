@@ -66,7 +66,7 @@ const Header = () => {
                 {paletteList()}
               </select>
               {boardData.useAnime === 1 && boardData.defaultAnime === 1 && <label><input type="checkbox" value="true" name="anime" title="動画記録" defaultChecked />アニメーション記録</label>}
-              {boardData.useAnime === 1 && boardData.defaultAnime === 0 && <label><IgrCheckbox type="checkbox" value="true" name="anime" title="動画記録" defaultChecked={false} />アニメーション記録</label>}
+              {boardData.useAnime === 1 && boardData.defaultAnime === 0 && <label><input type="checkbox" value="true" name="anime" title="動画記録" defaultChecked={false} />アニメーション記録</label>}
               <input className="button" type="submit" value="お絵かき" />
             </p>
           </form>
