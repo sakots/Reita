@@ -162,7 +162,6 @@ try {
   $oya = array();
 
   $i = 0;
-  $j = 0;
   while ($i < PAGE_DEF) {
     $bbsLine = $posts->fetch();
     if (empty($bbsLine)) {
@@ -207,7 +206,7 @@ try {
       //日付をUNIX時間に変換して設定どおりにフォーマット
       $res['created'] = date(DATE_FORMAT, strtotime($res['created']));
       $res['modified'] = date(DATE_FORMAT, strtotime($res['modified']));
-      $oya[$i][] = $res;
+      $ko[$i][$j] = $res;
       $j++;
     }
     // http、https以外のURLの場合表示しない
@@ -231,6 +230,7 @@ try {
   }
 
   $threads['oya'] = $oya;
+  $threads['oya']['ko'] = $ko;
   $threads['dsp_res'] = DSP_RES;
   $threads['path'] = IMG_DIR;
 
