@@ -167,6 +167,24 @@ try {
     if (empty($bbsLine)) {
       break;
     } //スレがなくなったら抜ける
+    // http、https以外のURLの場合表示しない
+    if (!filter_var($bbsLine['a_url'], FILTER_VALIDATE_URL) || !preg_match('|^https?://.*$|', $bbsLine['a_url'])) {
+      $bbsLine['a_url'] = "";
+    }
+    $bbsLine['com'] = htmlspecialchars($bbsLine['com'], ENT_QUOTES | ENT_HTML5);
+
+    //空行を縮める
+    $bbsLine['com'] = preg_replace('/(\n|\r|\r\n){3,}/us', "\n\n", $bbsLine['com']);
+    //<br>に
+    //$bbsLine['com'] = nl2br($bbsLine['com'], false);
+    //引用の色
+    $bbsLine['com'] = quote($bbsLine['com']);
+    //日付をUNIX時間にしたあと整形
+    $bbsLine['past'] = strtotime($bbsLine['created']); // このスレは古いので用
+    $bbsLine['created'] = date(DATE_FORMAT, strtotime($bbsLine['created']));
+    $bbsLine['modified'] = date(DATE_FORMAT, strtotime($bbsLine['modified']));
+    $threads['threads'][$i] = $bbsLine;
+    //レス取得開始
     $oyaId = $bbsLine["tid"]; //スレのtid(親番号)を取得
     $sqlRes = "SELECT * FROM tlog WHERE parent = $oyaId AND invz=0 AND thread=0 ORDER BY comid ASC";
     //レス取得
@@ -206,31 +224,12 @@ try {
       //日付をUNIX時間に変換して設定どおりにフォーマット
       $res['created'] = date(DATE_FORMAT, strtotime($res['created']));
       $res['modified'] = date(DATE_FORMAT, strtotime($res['modified']));
-      $ko[$i][$j] = $res;
+      $threads['threads'][$i][] = $res;
       $j++;
     }
-    // http、https以外のURLの場合表示しない
-    if (!filter_var($bbsLine['a_url'], FILTER_VALIDATE_URL) || !preg_match('|^https?://.*$|', $bbsLine['a_url'])) {
-      $bbsLine['a_url'] = "";
-    }
-    $bbsLine['com'] = htmlspecialchars($bbsLine['com'], ENT_QUOTES | ENT_HTML5);
-
-    //空行を縮める
-    $bbsLine['com'] = preg_replace('/(\n|\r|\r\n){3,}/us', "\n\n", $bbsLine['com']);
-    //<br>に
-    //$bbsLine['com'] = nl2br($bbsLine['com'], false);
-    //引用の色
-    $bbsLine['com'] = quote($bbsLine['com']);
-    //日付をUNIX時間にしたあと整形
-    $bbsLine['past'] = strtotime($bbsLine['created']); // このスレは古いので用
-    $bbsLine['created'] = date(DATE_FORMAT, strtotime($bbsLine['created']));
-    $bbsLine['modified'] = date(DATE_FORMAT, strtotime($bbsLine['modified']));
-    $oya[] = $bbsLine;
     $i++;
   }
 
-  $threads['oya'] = $oya;
-  $threads['oya']['ko'] = $ko;
   $threads['dsp_res'] = DSP_RES;
   $threads['path'] = IMG_DIR;
 
