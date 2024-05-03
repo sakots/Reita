@@ -218,13 +218,13 @@ try {
       //空行を縮める
       $res['com'] = preg_replace('/(\n|\r|\r\n|\n\r){3,}/us', "\n\n", $res['com']);
       //<br>に
-      //$res['com'] = nl2br($res['com'], false);;
+      //$res['com'] = nl2br($res['com'], false);
       //引用の色
       $res['com'] = quote($res['com']);
       //日付をUNIX時間に変換して設定どおりにフォーマット
       $res['created'] = date(DATE_FORMAT, strtotime($res['created']));
       $res['modified'] = date(DATE_FORMAT, strtotime($res['modified']));
-      $threads['threads'][$i][] = $res;
+      $threads['threads'][$i]['reply'][] = $res;
       $j++;
     }
     $i++;
