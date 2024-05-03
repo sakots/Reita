@@ -14,13 +14,11 @@ const Header = () => {
 
   const paletteList = () => {
     if (boardData.selectPalettes === 1) {
-      return (
-        <>
-          <option value="palette.txt" id="標準">標準</option>
-          <option value="PCCS_HSL.txt" id="p_PCCS.txt">PCCS_HSL</option>
-          <option value="p_munsellHVC.txt" id="マンセルHV/C">マンセルHV/C</option>
-        </>
-      )
+      const palettes = boardData.palletsData.map((palette, id) =>
+        <option value={palette[1]} id={palette[0]} key={id}>{palette[0]}</option>
+    )
+      return palettes
+
     } else {
       return <option value="palette.txt" id="標準">標準</option>
     }
