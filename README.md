@@ -66,7 +66,7 @@ Reitaのオリジナルのコードは MIT License により提供されます�
 ### [2024/04/29]
 
 - initでエラーのとき動かさないようにできた
-- フロントエンドにLinkify追加 `npm install linkifyjs linkify-html linkify-plugin-hashtag`
+- フロントエンドにLinkify追加 `npm install linkifyjs linkify-react linkify-html linkify-plugin-hashtag`
 - ヘッダー途中まで
 
 ### [2024/04/28]
