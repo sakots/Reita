@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Linkify from 'linkify-react'
 import axios from 'axios'
 
 const boardDataURL = import.meta.env.VITE_GET_CONFIG_URL
@@ -14,21 +15,21 @@ const Header = () => {
 
   const paletteList = () => {
     if (boardData.selectPalettes === 1) {
-      return (
-        <>
-          <option value="palette.txt" id="標準">標準</option>
-          <option value="PCCS_HSL.txt" id="p_PCCS.txt">PCCS_HSL</option>
-          <option value="p_munsellHVC.txt" id="マンセルHV/C">マンセルHV/C</option>
-        </>
-      )
+      const palettes = boardData.palletsData.map((palette, id) =>
+        <option value={palette[1]} id={palette[0]} key={id}>{palette[0]}</option>
+    )
+      return palettes
+
     } else {
       return <option value="palette.txt" id="標準">標準</option>
     }
   }
-
-  //const addInfoList = () => {
-  //  boardData.addInfo.map(infos => (infos.map((info, id) => {return <li key={id}>{info}</li> })))
-  //}
+  const addInfoList = () => {
+    const addInfoList = boardData.addInfo ? boardData.addInfo.map((info, id) =>
+      <Linkify as="li" key={id}>{info}</Linkify>
+    ) : null
+    return addInfoList
+  }
 
   return (
     <div>
@@ -53,8 +54,8 @@ const Header = () => {
         <section className="ePost">
           <form action="{{$self}}" method="post" encType="multipart/form-data">
             <p>
-              <label>幅：<input className="form" type="number" min="300" max={boardData.paintMaxWidth} name="pictureWidth" value={boardData.paintDefaultWidth} required /></label>
-              <label>高さ：<input className="form" type="number" min="300" max={boardData.paintMaxHeight}  name="pictureHeight" value={boardData.paintDefaultHeight} required /></label>
+              <label>幅：<input className="form" type="number" min="300" max={boardData.paintMaxWidth} name="pictureWidth" defaultValue={boardData.paintDefaultWidth} required /></label>
+              <label>高さ：<input className="form" type="number" min="300" max={boardData.paintMaxHeight}  name="pictureHeight" defaultValue={boardData.paintDefaultHeight} required /></label>
               <input type="hidden" name="mode" value="paint" />
               <label htmlFor="tools">ツール</label>
               <select name="tools" id="tools">
@@ -73,6 +74,7 @@ const Header = () => {
           <ul>
             <li>iPadやスマートフォンでも描けるお絵かき掲示板です。</li>
             <li>お絵かきできるサイズは幅300～{boardData.paintMaxWidth}px、高さ300～{boardData.paintMaxHeight}pxです。</li>
+            {addInfoList()}
           </ul>
         </section>
       </div>

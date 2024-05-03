@@ -260,9 +260,9 @@ define('USE_HASHTAG', 1);
 define('UPDATE_MARK', '*');
 
 //フォーム下の追加お知らせ <li></li>で囲まれます。
-//(例) $addInfo = array('まだまだ開発中…','バグがあったら教えてね');
-//設定しないなら $addInfo = array(''); で
-$addInfo = array('<a href="https://github.com/sakots/Reita">ソースはこちら</a>', 'まだまだ開発中…バグがあったら教えてね。');
+//(例) $addInfo = ['まだまだ開発中…','バグがあったら教えてね'];
+//設定しないなら $addInfo = ['']; で
+$addInfo = ['https://github.com/sakots/Reita ソースはこちら', 'まだまだ開発中…バグがあったら教えてね。'];
 
 /* ---------- お絵かき設定 ---------- */
 
@@ -294,7 +294,7 @@ define('PALETTE_FILE', 'palette.txt');
 define('USE_SELECT_PALETTES', 1);
 
 //パレットデータファイル切り替え機能を使用する する:1 の時のパレットデーターファイル名
-$palletsData = array(['標準', 'palette.txt'], ['PCCS_HSL', 'p_PCCS.txt'], ['マンセルHV/C', 'p_munsellHVC.txt']);
+$palletsData = [['標準', 'palette.txt'], ['PCCS_HSL', 'p_PCCS.txt'], ['マンセルHV/C', 'p_munsellHVC.txt']];
 
 //動画機能を使用する する:1 しない:0
 define('USE_ANIME', 1);
