@@ -42,7 +42,7 @@ const Home = () => {
               threadsName.admins === 1 ? <svg viewBox="0 0 640 512"><use href="./assets/user-check.svg#admin_badge" /></svg> : null
             }
             {
-              threadsName.modified === threadsName.created ? threadsName.modified : threadsName.created
+              threadsName.modified === threadsName.created ? " "+threadsName.modified : threadsName.created
             }
             {
               threadsName.modified === threadsName.created ? null : boardData.updateMark
@@ -52,7 +52,7 @@ const Home = () => {
             }
             {threadsName.mail && <span className="mail"><a href={threadsName.mail}>[mail]</a></span>}
             {threadsName.a_url && <span className="url"><a href={threadsName.a_url} target="_blank" rel="nofollow noopener noreferrer">[URL]</a></span>}
-            {boardData.displayId === 1 ? <span className="id">ID：{threadsName.id} </span> : null}
+            {boardData.displayId === 1 ? <span className="id"> ID：{threadsName.id} </span> : null}
 						<span className="sodane"><a href="">{boardData.favorite}
               {threadsName.exid !== 0 ? null : "x" }
               {threadsName.exid === 0 ? threadsName.exid : " +" }
@@ -65,11 +65,11 @@ const Home = () => {
               {threadsName.tool} {threadsName.img_w}x{threadsName.img_h}
               {threadsName.psec !== null || boardData.displayPaintTime !== 1 ? " 描画時間：" : null }
               {threadsName.psec !== null || boardData.displayPaintTime !== 1 ? threadsName.utime : null }
-              {threadsName.ext01 === 1 && "★NSFW"}
+              {threadsName.ext01 === 1 && " ★NSFW"}
             </h5>
             <h5>
-              <a target="_blank" href={threadsName.picfile}>{threadsName.picfile}</a>
-              {threadsName.tool !== "Chicken Paint" && <a href="" target="_blank">●動画</a>}
+              <a target="_blank" href={threadsName.picfile}>{threadsName.picfile}</a>&nbsp;
+              {threadsName.tool !== "Chicken Paint" && <a href="" target="_blank">●動画</a>}&nbsp;
               {boardData.useContinue === 1 && <a href="">●続きを描く</a>}
             </h5>
             </>
