@@ -5,6 +5,10 @@
   padding: 0px;
 }
 
+.comment {
+  white-space: pre-wrap;
+}
+
 label {
   cursor: pointer;
 }

@@ -10,6 +10,11 @@ $cat_img_size: 150px;	//カタログモードのイメージサイズ
 	padding: 0px;
 }
 
+//改行
+.comment {
+	white-space: pre-wrap;
+}
+
 //iOS対策
 
 label {
