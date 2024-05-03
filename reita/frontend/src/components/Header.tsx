@@ -15,7 +15,7 @@ const Header = () => {
 
   const paletteList = () => {
     if (boardData.selectPalettes === 1) {
-      const palettes = boardData.palletsData.map((palette, id) =>
+      const palettes = boardData.palletsData.map((palette: Array, id: number) =>
         <option value={palette[1]} id={palette[0]} key={id}>{palette[0]}</option>
     )
       return palettes
@@ -25,14 +25,14 @@ const Header = () => {
     }
   }
   const addInfoList = () => {
-    const addInfoList = boardData.addInfo ? boardData.addInfo.map((info, id) =>
+    const addInfoList = boardData.addInfo ? boardData.addInfo.map((info: string, id: number) =>
       <Linkify as="li" key={id}>{info}</Linkify>
     ) : null
     return addInfoList
   }
 
   return (
-    <div>
+    <div id='header'>
       <h1><a href="./">{boardData.boardTitle}</a></h1>
       <div>
         <a href={boardData.home} target="_top">[ホーム]</a>

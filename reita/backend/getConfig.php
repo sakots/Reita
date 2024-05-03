@@ -80,6 +80,8 @@ $config['shareButton'] = SHARE_BUTTON;
 
 $config['useHashtag'] = USE_HASHTAG;
 
+$config['favorite'] = FAVORITE;
+
 //書き出し
 
 $configData = json_encode($config, JSON_UNESCAPED_UNICODE);

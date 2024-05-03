@@ -53,6 +53,8 @@ Reitaのオリジナルのコードは MIT License により提供されます�
 ### [2024/05/03]
 
 - addInfoの出力に成功
+- css適用までできた
+- スレッドの描写に成功
 
 ### [2024/05/02]
 
@@ -66,7 +68,7 @@ Reitaのオリジナルのコードは MIT License により提供されます�
 ### [2024/04/29]
 
 - initでエラーのとき動かさないようにできた
-- フロントエンドにLinkify追加 `npm install linkifyjs linkify-html linkify-plugin-hashtag`
+- フロントエンドにLinkify追加 `npm install linkifyjs linkify-react linkify-html linkify-plugin-hashtag`
 - ヘッダー途中まで
 
 ### [2024/04/28]
