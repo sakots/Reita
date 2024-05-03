@@ -260,9 +260,9 @@ define('USE_HASHTAG', 1);
 define('UPDATE_MARK', '*');
 
 //フォーム下の追加お知らせ <li></li>で囲まれます。
-//(例) $addInfo = array('まだまだ開発中…','バグがあったら教えてね');
-//設定しないなら $addInfo = array(''); で
-$addInfo = array('<a href="https://github.com/sakots/Reita">ソースはこちら</a>', 'まだまだ開発中…バグがあったら教えてね。');
+//(例) $addInfo = ['まだまだ開発中…','バグがあったら教えてね'];
+//設定しないなら $addInfo = ['']; で
+$addInfo = ['<a href="https://github.com/sakots/Reita">ソースはこちら</a>', 'まだまだ開発中…バグがあったら教えてね。'];
 
 /* ---------- お絵かき設定 ---------- */
 

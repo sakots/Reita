@@ -51,8 +51,8 @@ const Header = () => {
         <section className="ePost">
           <form action="{{$self}}" method="post" encType="multipart/form-data">
             <p>
-              <label>幅：<input className="form" type="number" min="300" max={boardData.paintMaxWidth} name="pictureWidth" value={boardData.paintDefaultWidth} required /></label>
-              <label>高さ：<input className="form" type="number" min="300" max={boardData.paintMaxHeight}  name="pictureHeight" value={boardData.paintDefaultHeight} required /></label>
+              <label>幅：<input className="form" type="number" min="300" max={boardData.paintMaxWidth} name="pictureWidth" defaultValue={boardData.paintDefaultWidth} required /></label>
+              <label>高さ：<input className="form" type="number" min="300" max={boardData.paintMaxHeight}  name="pictureHeight" defaultValue={boardData.paintDefaultHeight} required /></label>
               <input type="hidden" name="mode" value="paint" />
               <label htmlFor="tools">ツール</label>
               <select name="tools" id="tools">
