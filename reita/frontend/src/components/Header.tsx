@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Linkify from 'linkify-react'
 import axios from 'axios'
 
 const boardDataURL = import.meta.env.VITE_GET_CONFIG_URL
@@ -23,10 +24,12 @@ const Header = () => {
       return <option value="palette.txt" id="標準">標準</option>
     }
   }
-
-  //const addInfoList = () => {
-  //  boardData.addInfo.map(infos => (infos.map((info, id) => {return <li key={id}>{info}</li> })))
-  //}
+  const addInfoList = () => {
+    const addInfoList = boardData.addInfo ? boardData.addInfo.map((info, id) =>
+      <Linkify as="li" key={id}>{info}</Linkify>
+    ) : null
+    return addInfoList
+  }
 
   return (
     <div>
@@ -71,6 +74,7 @@ const Header = () => {
           <ul>
             <li>iPadやスマートフォンでも描けるお絵かき掲示板です。</li>
             <li>お絵かきできるサイズは幅300～{boardData.paintMaxWidth}px、高さ300～{boardData.paintMaxHeight}pxです。</li>
+            {addInfoList()}
           </ul>
         </section>
       </div>
