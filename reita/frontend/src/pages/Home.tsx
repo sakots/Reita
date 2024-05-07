@@ -149,7 +149,7 @@ const Home = () => {
         </p>
       </section>
       <section>
-      <form className="delf" action="{{$self}}" method="post">
+      <form className="delfo" action="{{$self}}" method="post">
 				<p>
           No <input className="form" type="number" min="1" name="delno" defaultValue="" autoComplete="off" required />
           Pass <input className="form" type="password" name="pwd" defaultValue="" autoComplete="current-password" />
