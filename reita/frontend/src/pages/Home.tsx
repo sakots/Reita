@@ -118,12 +118,12 @@ const Home = () => {
           </div>
           )
         }
+        <div className="thfoot">
+          <span className="button"><a href=""><svg viewBox="0 0 512 512"><use href="../assets/rep.svg#rep" /></svg> 返信</a></span>
+          <a href="#header">[↑]</a>
+          <hr />
+        </div>
       </section>
-      <div className="thfoot">
-				<span className="button"><a href=""><svg viewBox="0 0 512 512"><use href="../assets/rep.svg#rep" /></svg> 返信</a></span>
-				<a href="#header">[↑]</a>
-				<hr />
-			</div>
       </>
   ) : null
     return threadsList
@@ -158,7 +158,6 @@ const Home = () => {
             <option value="del">削除</option>
           </select>
           <input className="button" type="submit" value=" OK " />
-          <label htmlFor="mystyle">Color</label>
           </p>
 				</form>
 				<script>
