@@ -58,10 +58,10 @@ hr {
 	border-color: $border;
 }
 //----------
-header, .thread, footer {
+div#header, .thread, footer {
 	background-color: $haikei;
 }
-header {
+div#header {
 	border-color: $border;
 }
 h1 {
@@ -136,7 +136,7 @@ button {
 		}
 	}
 }
-.oyat {
+.oyaTitle {
 	border-color: $border;
 	@if $dev == 1 {
 		background: linear-gradient(to right, $th_bg, lighten($th_bg,20%), adjust-hue(lighten($th_bg, 10%),-20deg)) fixed;

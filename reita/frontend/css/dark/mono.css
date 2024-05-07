@@ -30,11 +30,11 @@ hr {
   border-color: #99F;
 }
 
-header, .thread, footer {
+div#header, .thread, footer {
   background-color: #333333;
 }
 
-header {
+div#header {
   border-color: #99F;
 }
 
@@ -124,7 +124,7 @@ button {
   fill: #FFF;
 }
 
-.oyat {
+.oyaTitle {
   border-color: #99F;
   background: #036;
   color: #EEC;

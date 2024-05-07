@@ -2,7 +2,6 @@
 /*! =====このcssファイルはsassから生成されています。===== */
 body {
   background-attachment: fixed;
-  background: -webkit-gradient(linear, left top, left bottom, from(#224), to(black)) fixed;
   background: linear-gradient(#224, black) fixed;
   color: #EEE;
 }
@@ -31,11 +30,11 @@ hr {
   border-color: #922;
 }
 
-header, .thread, footer {
+div#header, .thread, footer {
   background-color: #122;
 }
 
-header {
+div#header {
   border-color: #922;
 }
 
@@ -125,9 +124,8 @@ button {
   fill: #FFF;
 }
 
-.oyat {
+.oyaTitle {
   border-color: #922;
-  background: -webkit-gradient(linear, left top, right top, from(#012), color-stop(#004488), to(#004755)) fixed;
   background: linear-gradient(to right, #012, #004488, #004755) fixed;
   color: #DFE;
 }
