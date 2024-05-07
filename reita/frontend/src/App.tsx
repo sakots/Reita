@@ -9,7 +9,7 @@ import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-const css: any = window.localStorage.getItem("css")
+const css: string|null = window.localStorage.getItem("css")
 
 const initDataURL = import.meta.env.VITE_GET_INIT_URL
 
