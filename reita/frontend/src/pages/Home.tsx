@@ -8,12 +8,6 @@ const threadDataURL = import.meta.env.VITE_GET_THREAD_URL
 
 const Home = () => {
 
-  const [theme, setTheme] = useState("./css/reita/mono.min.css")
-  const saveTheme = (passedTheme) => {
-    window.localStorage.setItem("css", passedTheme)
-    setTheme(passedTheme)
-  }
-
   const [boardData, setBoardData] = useState("")
   useEffect(() => {
     axios.get(boardDataURL).then((response) => {
@@ -91,7 +85,7 @@ const Home = () => {
             </h5>
             </>
           }
-          {threadsName.ext01 === 1 ? <a className="luminous" href={threadsName.picfile}><span className="nsfw"><img src={threadsName.picfile} alt={threadsName.picfile} loading="lazy" className="image" /></span></a> : <a className="luminous" href={threadsName.picfile}><img src={threadsName.picfile} alt={threadsName.picfile} loading="lazy" className="image" /></a>}
+          {threadsName.ext01 === 1 ? <a className="luminous" href={"/backend/img/" + threadsName.picfile}><span className="nsfw"><img src={threadsName.picfile} alt={threadsName.picfile} loading="lazy" className="image" /></span></a> : <a className="luminous" href={"/backend/img/" + threadsName.picfile}><img src={"/backend/img/" + threadsName.picfile} alt={threadsName.picfile} loading="lazy" className="image" /></a>}
         </section>
         <div className='comment oya'><Linkify as="p" options={linkifyOptions}>{threadsName.com}</Linkify></div>
         {threadsName.reply && threadsName.reply.map((reply: string, id: number) =>

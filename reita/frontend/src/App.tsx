@@ -9,8 +9,6 @@ import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-const css: string|null = window.localStorage.getItem("css")
-
 const initDataURL = import.meta.env.VITE_GET_INIT_URL
 
 const App = () => {
@@ -24,7 +22,6 @@ const App = () => {
   if (initData.flag === false) {
     return (
       <>
-        <link rel="styleseet" href={css} />
         <Header />
         <Routes>
           <Route index element={<Home />} />
