@@ -5,37 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/reita/mono.min.css" id="css0">
-    <link rel="stylesheet" href="./css/red/mono.min.css" id="css1" disabled>
-    <link rel="stylesheet" href="./css/main/mono.min.css" id="css2" disabled>
-    <link rel="stylesheet" href="./css/dark/mono.min.css" id="css3" disabled>
-    <link rel="stylesheet" href="./css/deep/mono.min.css" id="css4" disabled>
-    <link rel="stylesheet" href="./css/mayo/mono.min.css" id="css5" disabled>
-    <link rel="stylesheet" href="./css/dev/mono.min.css" id="css6" disabled>
-    <link rel="stylesheet" href="./css/sql/mono.min.css" id="css7" disabled>
-    <link rel="stylesheet" href="./css/pop/mono.min.css" id="css8" disabled>
-    <script src="./js/switchcss.js"></script>
     <title>Reita</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <span class="stylechanger">
-      <label for="mystyle">Color</label>
-      <select class="form" name="select" id="mystyle" onChange="setCss(this);">
-        <option value="./css/reita/mono.min.css">REITA</option>
-        <option value="./css/red/mono.min.css">RED</option>
-        <option value="./css/main/mono.min.css">MONO</option>
-        <option value="./css/dark/mono.min.css">dark</option>
-        <option value="./css/deep/mono.min.css">deep</option>
-        <option value="./css/mayo/mono.min.css">MAYO</option>
-        <option value="./css/dev/mono.min.css">DEV</option>
-        <option value="./css/sql/mono.min.css">SQL</option>
-        <option value="./css/pop/mono.min.css">POP</option>
-      </select>
-    </span>
-    <script>
-      colorIdx = GetCookie('_monoreita_colorIdx');
-      document.getElementById("mystyle").selectedIndex = colorIdx;
-    </script>
   </body>
 </html>
