@@ -5,7 +5,8 @@ import Home from './pages/Home'
 import Catalog from './pages/Catalog'
 import Reply from './pages/Reply'
 import Searches from './pages/Searches'
-import './App.css'
+import "./css/App.css";
+import "./css/reita/mono.css";
 import Header from './components/Header'
 import Footer from './components/Footer'
 
