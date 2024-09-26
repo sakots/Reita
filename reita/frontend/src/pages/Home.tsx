@@ -154,10 +154,6 @@ const Home = () => {
           <input className="button" type="submit" value=" OK " />
           </p>
 				</form>
-				<script>
-					colorIdx = GetCookie('_monoreita_colorIdx');
-					document.getElementById("mystyle").selectedIndex = colorIdx;
-				</script>
 			</section>
     </>
   )
