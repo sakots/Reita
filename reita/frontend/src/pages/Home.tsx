@@ -94,7 +94,7 @@ const Home = () => {
               <h3>[{reply.tid}] {reply.sub}</h3>
               <h4>
 								名前：<span className="resname">{reply.a_name}
-                {reply.admins === 1 && <svg viewBox="0 0 640 512"><use href="./theme/{{$themedir}}/icons/user-check.svg#admin_badge" /></svg>}
+                {reply.admins === 1 && <svg viewBox="0 0 640 512"><use href="user-check.svg#admin_badge" /></svg>}
 								</span>：
                 {reply.modified === reply.created ? reply.modified : reply.created }
                 {reply.modified === reply.created ? null : boardData.updateMark}
@@ -113,7 +113,7 @@ const Home = () => {
           )
         }
         <div className="thfoot">
-          <span className="button"><a href=""><svg viewBox="0 0 512 512"><use href="../assets/rep.svg#rep" /></svg> 返信</a></span>
+          <span className="button"><a href=""><svg viewBox="0 0 512 512"><use href="rep.svg#rep" /></svg> 返信</a></span>
           <a href="#header">[↑]</a>
           <hr />
         </div>
