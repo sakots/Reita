@@ -34,7 +34,7 @@ function charconvert($str): string {
 
 /* NGワードがあれば拒絶 */
 function Reject_if_NGword_exists_in_the_post($com, $name, $email, $url, $sub): void {
-	global $badstring, $badname, $badstr_A, $badstr_B, $pwd, $admin_pass;
+	global $bad_string, $bad_name, $bad_str_A, $bad_str_B, $pwd, $admin_pass, $en;
 	//チェックする項目から改行・スペース・タブを消す
 	$chk_com  = preg_replace("/\s/u", "", $com);
 	$chk_name = preg_replace("/\s/u", "", $name);
@@ -42,31 +42,31 @@ function Reject_if_NGword_exists_in_the_post($com, $name, $email, $url, $sub): v
 	$chk_sub = preg_replace("/\s/u", "", $sub);
 
 	//本文に日本語がなければ拒絶
-	if (USE_JAPANESEFILTER) {
+	if (USE_JAPANESE_FILTER) {
 		mb_regex_encoding("UTF-8");
-		if (strlen($com) > 0 && !preg_match("/[ぁ-んァ-ヶー一-龠]+/u", $chk_com)) error(MSG035);
+		if (strlen($com) > 0 && !preg_match("/[ぁ-んァ-ヶー一-龠]+/u", $chk_com)) error($en ? 'The comment does not contain Japanese.' : 'コメントに日本語が含まれていません。');
 	}
 
 	//本文へのURLの書き込みを禁止
 	if (!($pwd === $admin_pass)) { //どちらも一致しなければ
-		if (DENY_COMMENTS_URL && preg_match('/:\/\/|\.co|\.ly|\.gl|\.net|\.org|\.cc|\.ru|\.su|\.ua|\.gd/i', $com)) error(MSG036);
+		if (DENY_COMMENTS_URL && preg_match('/:\/\/|\.co|\.ly|\.gl|\.net|\.org|\.cc|\.ru|\.su|\.ua|\.gd/i', $com)) error($en ? 'URL is not allowed.' : 'URLは禁止されています。');
 	}
 
 	// 使えない文字チェック
-	if (is_ngword($badstring, [$chk_com, $chk_sub, $chk_name, $chk_email])) {
-		error(MSG032);
+	if (is_ng_word($bad_string, [$chk_com, $chk_sub, $chk_name, $chk_email])) {
+		error($en ? 'The comment contains prohibited words.' : 'コメントに禁止された単語が含まれています。');
 	}
 
 	// 使えない名前チェック
-	if (is_ngword($badname, $chk_name)) {
-		error(MSG037);
+	if (is_ng_word($bad_name, $chk_name)) {
+		error($en ? 'The name contains prohibited words.' : '名前に禁止された単語が含まれています。');
 	}
 
 	//指定文字列が2つあると拒絶
-	$bstr_A_find = is_ngword($badstr_A, [$chk_com, $chk_sub, $chk_name, $chk_email]);
-	$bstr_B_find = is_ngword($badstr_B, [$chk_com, $chk_sub, $chk_name, $chk_email]);
+	$bstr_A_find = is_ng_word($bad_str_A, [$chk_com, $chk_sub, $chk_name, $chk_email]);
+	$bstr_B_find = is_ng_word($bad_str_B, [$chk_com, $chk_sub, $chk_name, $chk_email]);
 	if ($bstr_A_find && $bstr_B_find) {
-		error(MSG032);
+		error($en ? 'The comment contains prohibited words.' : 'コメントに禁止された単語が含まれています。');
 	}
 }
 
@@ -90,7 +90,7 @@ function get_image_type($img_type, $dest = null): string {
 	if (isset($map[$mime_type])) {
 		return $map[$mime_type];
 	}
-	error(MSG004, $dest);
+	error($en ? 'Invalid image type.' : '無効な画像タイプです。', $dest);
 	return ''; // この行は実際には実行されないが、リンターを満足させるために必要
 }
 
@@ -100,16 +100,16 @@ function get_image_type($img_type, $dest = null): string {
  * @param string|array $strs
  * @return bool
  */
-function is_ngword($ngwords, $strs): bool {
-	if (empty($ngwords)) {
+function is_ng_word($ng_words, $strs): bool {
+	if (empty($ng_words)) {
 		return false;
 	}
 	if (!is_array($strs)) {
 		$strs = [$strs];
 	}
 	foreach ($strs as $str) {
-		foreach ($ngwords as $ngword) { //拒絶する文字列
-			if ($ngword !== '' && preg_match("/{$ngword}/ui", $str)) {
+		foreach ($ng_words as $ng_word) { //拒絶する文字列
+			if ($ng_word !== '' && preg_match("/{$ng_word}/ui", $str)) {
 				return true;
 			}
 		}
@@ -122,14 +122,14 @@ function is_ngword($ngwords, $strs): bool {
  * @param $starttime
  * @return string
  */
-function calcPtime($psec): string {
+function calc_ptime($psec): string {
 
 	$D = floor($psec / 86400);
 	$H = floor($psec % 86400 / 3600);
 	$M = floor($psec % 3600 / 60);
 	$S = $psec % 60;
 
-	return ($D ? $D . PTIME_D : '') . ($H ? $H . PTIME_H : '') . ($M ? $M . PTIME_M : '') . ($S ? $S . PTIME_S : '');
+	return ($D ? $D . PAINT_TIME_D : '') . ($H ? $H . PAINT_TIME_H : '') . ($M ? $M . PAINT_TIME_M : '') . ($S ? $S . PAINT_TIME_S : '');
 }
 /**
  * ファイルがあれば削除
@@ -163,9 +163,8 @@ function auto_link($proto): string {
 
 /* ハッシュタグリンク */
 function hashtag_link($hashtag): string {
-	$self = PHP_SELF;
 	$pattern = "/(?:^|[^ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9&_\/]+)[#＃]([ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*[ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z]+[ｦ-ﾟー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*)/u";
-	$replace = " <a href=\"{$self}?mode=search&amp;tag=tag&amp;search=\\1\">#\\1</a>";
+	$replace = " <a href=\"?mode=search&amp;tag=tag&amp;search=\\1\">#\\1</a>";
 	$hashtag = preg_replace($pattern, $replace, $hashtag);
 	return $hashtag;
 }
@@ -178,29 +177,25 @@ function quote($quote): string {
 
 /* 改行を<br>に */
 function tobr($com): string {
-	if (TH_XHTML !== 1) {
-		$com = nl2br($com, false);
-	} else {
-		$com = nl2br($com);
-	}
+	$com = nl2br($com, false);
 	return $com;
 }
 
 /* ID生成 */
-function gen_id($userip, $time): string {
+function gen_id($user_ip, $time): string {
 	if (ID_CYCLE === '0') {
-		return substr(crypt(md5($userip . ID_SEED), 'id'), -8);
+		return substr(crypt(md5($user_ip . ID_SEED), 'id'), -8);
 	} elseif (ID_CYCLE === '1') {
-		return substr(crypt(md5($userip . ID_SEED . date("Ymd", $time)), 'id'), -8);
+		return substr(crypt(md5($user_ip . ID_SEED . date("Ymd", $time)), 'id'), -8);
 	} elseif (ID_CYCLE === '2') {
 		$week = ceil(date("d", $time) / 7);
-		return substr(crypt(md5($userip . ID_SEED . date("Ym", $time) . $week), 'id'), -8);
+		return substr(crypt(md5($user_ip . ID_SEED . date("Ym", $time) . $week), 'id'), -8);
 	} elseif (ID_CYCLE === '3') {
-		return substr(crypt(md5($userip . ID_SEED . date("Ym", $time)), 'id'), -8);
+		return substr(crypt(md5($user_ip . ID_SEED . date("Ym", $time)), 'id'), -8);
 	} elseif (ID_CYCLE === '4') {
-		return substr(crypt(md5($userip . ID_SEED . date("Y", $time)), 'id'), -8);
+		return substr(crypt(md5($user_ip . ID_SEED . date("Y", $time)), 'id'), -8);
 	} else {
-		return substr(crypt(md5($userip . ID_SEED), 'id'), -8);
+		return substr(crypt(md5($user_ip . ID_SEED), 'id'), -8);
 	}
 }
 
@@ -212,7 +207,7 @@ function redirect($url): void {
 
 //シェアするserverの選択画面
 function set_share_server(): void {
-	global $servers,$blade,$dat;
+	global $servers,$blade,$dat, $en;
 
 	//ShareするServerの一覧
 	//｢"ラジオボタンに表示するServer名","snsのserverのurl"｣
@@ -246,6 +241,7 @@ function set_share_server(): void {
 
 //SNSへ共有リンクを送信
 function post_share_server(): void {
+	global $en;
 
 	$sns_server_radio = (string)filter_input_data('POST',"sns_server_radio",FILTER_VALIDATE_URL);
 	$sns_server_radio_for_cookie = (string)filter_input_data('POST',"sns_server_radio");//directを判定するためurlでバリデーションしていない
@@ -279,7 +275,7 @@ function post_share_server(): void {
 	$share_url .= $encoded_t.'%20'.$encoded_u;
 	$share_url = filter_var($share_url, FILTER_VALIDATE_URL) ? $share_url : '';
 	if(!$share_url) {
-		error("SNSの共有先を選択してください。");
+		error($en ? 'Please select an SNS to share.' : 'SNSの共有先を選択してください。');
 	}
 	redirect($share_url);
 }
@@ -348,7 +344,7 @@ function check_csrf_token(): void {
 function session_sta(): void {
 	global $session_name;
 	if (session_status() === PHP_SESSION_NONE) {
-		$session_name = SESSION_NAME ?? 'noreita_session';
+		$session_name = SESSION_NAME ?? 'reita_session';
 		session_name($session_name);
 		session_save_path(__DIR__ . '/session/');
 		$https_only = (bool)($_SERVER['HTTPS'] ?? '');
@@ -456,15 +452,15 @@ return $msg;
 }
 
 function check_same_origin(): void {
-	global $en,$usercode;
+	global $en, $user_code;
 
 	session_sta();
-	$c_usercode = t(filter_input_data('COOKIE', 'usercode'));//user-codeを取得
-	$session_usercode = isset($_SESSION['usercode']) ? t($_SESSION['usercode']) : "";
-	if(!$c_usercode){
+	$c_user_code = t(filter_input_data('COOKIE', 'user_code'));//user-codeを取得
+	$session_user_code = isset($_SESSION['user_code']) ? t($_SESSION['user_code']) : "";
+	if(!$c_user_code){
 		error( $en ? 'Cookie check failed.':'Cookieが確認できません。');
 	}
-	if(!$usercode || ($usercode !== $c_usercode) && ($usercode !== $session_usercode)){
+	if(!$user_code || ($user_code !== $c_user_code) && ($user_code !== $session_user_code)){
 		error( $en ? "User code mismatch.":"ユーザーコードが一致しません。");
 	}
 	// POSTリクエストの場合のみHTTP_ORIGINをチェックする
@@ -501,16 +497,17 @@ function switch_tool($tool): string {
 
 //sessionの確認
 function admin_post_valid(): bool {
-	global $second_pass;
+	global $second_pass, $en;
 	session_sta();
 	return isset($_SESSION['admin_post']) && ($second_pass && $_SESSION['admin_post'] === $second_pass);
 }
 function admin_del_valid(): bool {
-	global $second_pass;
+	global $second_pass, $en;
 	session_sta();
 	return isset($_SESSION['admin_del']) && ($second_pass && $_SESSION['admin_del'] === $second_pass);
 }
 function user_del_valid(): bool {
+	global $en;
 	session_sta();
 	return isset($_SESSION['user_del']) && ($_SESSION['user_del'] === 'user_del_mode');
 }
