@@ -28,8 +28,7 @@ const Footer = () => {
           UseFunction -
           DynamicPalette{", "}
           <a href="https://huruihone.tumblr.com/" target="_blank" rel="noopener noreferrer" title="by Soto">AppletFit</a>{", "}
-          <a href="https://github.com/imgix/luminous" target="_blank" rel="noopener noreferrer" title="by imgix">Luminous</a>{", "}
-          <a href="https://github.com/EFTEC/BladeOne" target="_blank" rel="noopener noreferrer" title="by EFTEC">BladeOne</a>
+          <a href="https://github.com/imgix/luminous" target="_blank" rel="noopener noreferrer" title="by imgix">Luminous</a>
         </p>
       </div>
     </footer>
