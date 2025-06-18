@@ -177,7 +177,7 @@ function create_res($post): array {
 
 		// 共有用のエンコード
 		$res['encoded_t'] = urlencode('[' . $res['tid'] . ']' . $res['sub'] . ($res['a_name'] ? ' by ' . $res['a_name'] : '') . ' - ' . TITLE);
-		$res['encoded_u'] = urlencode(BASE . '?resno=' . $res['tid']);
+		$res['encoded_u'] = urlencode(BASE . '?res_no=' . $res['tid']);
 
 		return $res;
 	} catch (Exception $e) {
@@ -197,7 +197,7 @@ class misskey_note {
 		$admin_post = admin_post_valid();
 		$admin_del = admin_del_valid();
 
-		$dat['pwdc'] = (string)filter_input_data('COOKIE', 'pwdc');
+		$dat['pwd_cookie'] = (string)filter_input_data('COOKIE', 'pwd_cookie');
 		$dat['no'] = t(filter_input_data('POST', 'no', FILTER_VALIDATE_INT));
 		$dat['no'] = $dat['no'] ? $dat['no'] : t(filter_input_data('GET', 'no', FILTER_VALIDATE_INT));
 
@@ -219,11 +219,11 @@ class misskey_note {
 		$dat['token'] = get_csrf_token();
 
 		// nsfw
-		$dat['nsfwc'] = (bool)filter_input_data('COOKIE', 'nsfwc', FILTER_VALIDATE_BOOLEAN);
+		$dat['nsfw_cookie'] = (bool)filter_input_data('COOKIE', 'nsfw_cookie', FILTER_VALIDATE_BOOLEAN);
 		$dat['set_nsfw_show_hide'] = (bool)filter_input_data('COOKIE', 'p_n_set_nsfw_show_hide', FILTER_VALIDATE_BOOLEAN);
 
 		$dat['count_r_arr'] = count($dat['post']);
-		$dat['edit_mode'] = 'editmode';
+		$dat['edit_mode'] = 'edit_mode';
 
 		$admin_pass = null;
 
@@ -246,8 +246,8 @@ class misskey_note {
 		$dat['admin'] = ($dat['admin_del'] || $dat['admin_post']);
 
 		$pwd = (string)filter_input_data('POST', 'pwd');
-		$pwdc = (string)filter_input_data('COOKIE', 'pwdc');
-		$pwd = $pwd ? $pwd : $pwdc;
+		$pwd_cookie = (string)filter_input_data('COOKIE', 'pwd_cookie');
+		$pwd = $pwd ? $pwd : $pwd_cookie;
 
 		$id_and_no = (string)filter_input_data('POST', 'id_and_no');
 
@@ -277,12 +277,12 @@ class misskey_note {
 		// Misskeyサーバーリストをセット
 		$dat['misskey_servers'] = $misskey_servers;
 
-		$dat['nsfwc'] = (bool)filter_input_data('COOKIE', 'nsfwc', FILTER_VALIDATE_BOOLEAN);
+		$dat['nsfw_cookie'] = (bool)filter_input_data('COOKIE', 'nsfw_cookie', FILTER_VALIDATE_BOOLEAN);
 		$dat['set_nsfw_show_hide'] = (bool)filter_input_data('COOKIE', 'p_n_set_nsfw_show_hide', FILTER_VALIDATE_BOOLEAN);
 
 		$page = $_SESSION['current_page_context']["page"] ?? 0;
-		$resno = $_SESSION['current_page_context']["resno"] ?? null; //下の行でnull判定
-		$resno ?? $no;
+		$res_no = $_SESSION['current_page_context']["res_no"] ?? null; //下の行でnull判定
+		$res_no ?? $no;
 
 		$user_del = false;
 		$admin_del = false;
@@ -300,19 +300,19 @@ class misskey_note {
 	}
 
 	//Misskeyに投稿するSESSIONデータを作成
-	public static function create_misskey_note_sessiondata(): void {
-		global $en, $usercode, $misskey_servers;
+	public static function create_misskey_note_session_data(): void {
+		global $en, $user_code, $misskey_servers;
 
 		check_csrf_token();
 
-		$userip = t(get_uip());
+		$user_ip = t(get_uip());
 		$no = t(filter_input_data('POST', 'no', FILTER_VALIDATE_INT));
 		$src_image = t(filter_input_data('POST', 'src_image'));
 		$com = t(filter_input_data('POST', 'com'));
-		$abbr_toolname = t(filter_input_data('POST', 'abbr_toolname'));
-		$paintsec = (int)filter_input_data('POST', 'paintsec', FILTER_VALIDATE_INT);
+		$abbr_tool_name = t(filter_input_data('POST', 'abbr_tool_name'));
+		$paint_sec = (int)filter_input_data('POST', 'paint_sec', FILTER_VALIDATE_INT);
 		$hide_thumbnail = (bool)filter_input_data('POST', 'hide_thumbnail', FILTER_VALIDATE_BOOLEAN);
-		$show_painttime = (bool)filter_input_data('POST', 'show_painttime', FILTER_VALIDATE_BOOLEAN);
+		$show_paint_time = (bool)filter_input_data('POST', 'show_paint_time', FILTER_VALIDATE_BOOLEAN);
 		$article_url_link = (bool)filter_input_data('POST', 'article_url_link', FILTER_VALIDATE_BOOLEAN);
 		$hide_content = (bool)filter_input_data('POST', 'hide_content', FILTER_VALIDATE_BOOLEAN);
 		$cw = t(filter_input_data('POST', 'cw'));
@@ -324,16 +324,16 @@ class misskey_note {
 		check_AsyncRequest();
 
 		$cw = $hide_content ? $cw : null;
-		$tool = switch_tool($abbr_toolname);
+		$tool = switch_tool($abbr_tool_name);
 
-		$painttime = calcPtime($paintsec);
-		$painttime_str = '';
-		if (is_array($painttime)) {
-			$painttime_str = $en ? ($painttime['en'] ?? '') : ($painttime['ja'] ?? '');
+		$paint_time = calcPtime($paint_sec);
+		$paint_time_str = '';
+		if (is_array($paint_time)) {
+			$paint_time_str = $en ? ($paint_time['en'] ?? '') : ($paint_time['ja'] ?? '');
 		} else {
-			$painttime_str = (string)$painttime;
+			$paint_time_str = (string)$paint_time;
 		}
-		$painttime_to_session = $show_painttime ? $painttime_str : '';
+		$paint_time_to_session = $show_paint_time ? $paint_time_str : '';
 
 		session_sta();
 
@@ -343,7 +343,7 @@ class misskey_note {
 			'src_image' => $src_image,
 			'com' => $com,
 			'tool' => $tool,
-			'painttime' => $painttime_to_session,
+			'paint_time' => $paint_time_to_session,
 			'hide_thumbnail' => $hide_thumbnail,
 			'article_url_link' => $article_url_link,
 			'cw' => $cw
@@ -354,7 +354,7 @@ class misskey_note {
 			$com,
 			$src_image,
 			$tool,
-			$painttime_to_session,
+			$paint_time_to_session,
 			$hide_thumbnail,
 			$no,
 			$article_url_link,
@@ -362,11 +362,11 @@ class misskey_note {
 		];
 
 		// Misskeyサーバー認証URLを生成する処理を直接呼び出す
-		self::create_misskey_authrequesturl();
+		self::create_misskey_auth_request_url();
 	}
 
 	// Misskeyサーバー認証URLを生成
-	public static function create_misskey_authrequesturl(): void {
+	public static function create_misskey_auth_request_url(): void {
 		global $en;
 
 		check_same_origin();
