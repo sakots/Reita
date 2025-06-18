@@ -1,26 +1,27 @@
 <?php
 //--------------------------------------------------
-//  Reita v0.0.0～
+//  noReita v1.3.0～
 //  by sakots >> https://oekakibbs.moe/
-//  Reitaの設定ファイルです。
+//  noReitaの設定ファイルです。
 //--------------------------------------------------
 
 /* ---------- 最初に設定する項目 ---------- */
 //管理者パスワード
-//必ず変更してください ! admin のままではプログラムは動作しません !
-$adminPass = 'admin';
+//必ず変更してください ! admin_pass のままではプログラムは動作しません !
+$admin_pass = 'admin_pass';
 
 //管理者名
 //投稿の際に名前がこれでパスワードが管理パスのときに、名前のあとに管理者マークが付きます
-$adminName = '管理人';
+$admin_name = '管理人';
 
 //最大スレッド数
 //古いスレッドから順番に消えます
 define('LOG_MAX_T', 300);
 
-//設置URL indexのあるディレクトリの'/'まで
+//設置URL phpのあるディレクトリの'/'まで
 //シェアボタンなどで使用
-define('BASE', 'https://example.com/reita/');
+//misskey連携では正しいURL必須
+define('BASE', 'https://example.com/noreita/');
 
 //掲示板のタイトル（<title>とTOP）
 define('TITLE', 'お絵かき掲示板');
@@ -28,16 +29,17 @@ define('TITLE', 'お絵かき掲示板');
 //「ホーム」へのリンク
 // 自分のサイトにお絵かき掲示板がある、という慣習からのものです。
 // 自分のサイトのURL（絶対パスも可）をどうぞ。
-define('HOME', '../../');
+define('HOME', '../');
 
 // ChickenPaintを使う 使う:1 使わない:0
 define('USE_CHICKENPAINT', 1);
+
+//しぃペインターを使用する する:1 しない:0
+define('USE_SHI_PAINTER', 1);
+
 // PaintBBS NEOはどの設定でも起動します。
 
 /*----------絶対に設定が必要な項目はここまでです。ここから下は必要に応じて。----------*/
-
-//そうだね
-define('FAVORITE', 'そうだね');
 
 /* -------- データベース名 -------- */
 
@@ -49,7 +51,59 @@ define('DB_NAME', 'reita');
 
 //シェアボタンを表示する する:1 しない:0
 //設置場所のURL BASE で設定したurlをもとにリンクを作成
-define('SHARE_BUTTON', 0);
+define('SHARE_BUTTON', 1);
+
+/* ---------- SNSシェア機能詳細設定 ---------- */
+//SNSシェア詳細を表示する する:1 しない:0
+define('SWITCH_SNS', 1);
+
+//SNS共有の時に一覧で表示するサーバ
+//例 	["表示名","https://example.com (SNSのサーバのurl)"],(最後にカンマが必要です)
+
+$servers =
+[
+	["X","https://x.com"],
+	["Bluesky","https://bsky.app"],
+	["Threads","https://www.threads.net"],
+	["pawoo.net","https://pawoo.net"],
+	["fedibird.com","https://fedibird.com"],
+	["misskey.io","https://misskey.io"],
+	["xissmie.xfolio.jp","https://xissmie.xfolio.jp"],
+	["misskey.design","https://misskey.design"],
+	["nijimiss.moe","https://nijimiss.moe"],
+	["sushi.ski","https://sushi.ski"],
+];
+
+//SNS共有の時に開くWindowsの幅と高さ
+//windowの幅 初期値 600
+define("SNS_WINDOW_WIDTH","600");
+
+//windowの高さ 初期値 600
+define("SNS_WINDOW_HEIGHT","600");
+
+//Misskey投稿機能設定
+
+//Misskeyへの投稿機能を有効にする
+//する: 1 しない: 0
+define('USE_MISSKEY_NOTE', 1);
+
+//Misskeyへの投稿時に一覧で表示するMisskeyサーバ
+$misskey_servers=
+[
+	["misskey.io","https://misskey.io"],
+	["xissmie.xfolio.jp","https://xissmie.xfolio.jp"],
+	["misskey.design","https://misskey.design"],
+	["nijimiss.moe","https://nijimiss.moe"],
+	["misskey.art","https://misskey.art"],
+	["oekakiskey.com","https://oekakiskey.com"],
+	["misskey.gamelore.fun","https://misskey.gamelore.fun"],
+	["novelskey.tarbin.net","https://novelskey.tarbin.net"],
+	["tyazzkey.work","https://tyazzkey.work"],
+	["sushi.ski","https://sushi.ski"],
+	["misskey.delmulin.com","https://misskey.delmulin.com"],
+	["side.misskey.productions","https://side.misskey.productions"],
+	["mk.shrimpia.network","https://mk.shrimpia.network"],
+];
 
 /* ---------- NSFW画像 ---------- */
 
@@ -76,16 +130,16 @@ define('ADMIN_CAP', '(ではない)');
 /* ---------- スパム対策 ---------- */
 
 //拒絶する文字列
-$badString = array("irc.s16.xrea.com", "著作権の侵害", "未承諾広告");
+$bad_string = array("irc.s16.xrea.com", "著作権の侵害", "未承諾広告");
 
 //使用できない名前
-$badName = array("ブランド", "通販", "販売", "口コミ");
+$bad_name = array("ブランド", "通販", "販売", "口コミ");
 
 //全角半角スペース改行を考慮する必要はありません
 //スペースと改行を除去した文字列をチェックします
 
 //設定しないなら ""で。
-// $badName = array("");
+// $bad_name = array("");
 
 //初期設定では「"通販"を含む名前」の投稿を拒絶します
 //ここで設定したNGワードが有効になるのは「名前」だけです
@@ -96,16 +150,16 @@ $badName = array("ブランド", "通販", "販売", "口コミ");
 //拒絶する文字列で
 
 //AとBが両方あったら拒絶。
-$badString_A = array("激安", "低価", "コピー", "品質を?重視", "大量入荷");
-$badString_B = array("シャネル", "シュプリーム", "バレンシアガ", "ブランド");
+$bad_str_A = array("激安", "低価", "コピー", "品質を?重視", "大量入荷");
+$bad_str_B = array("シャネル", "シュプリーム", "バレンシアガ", "ブランド");
 
 //正規表現を使うことができます。
 //全角半角スペース改行を考慮する必要はありません
 //スペースと改行を除去した文字列をチェックします
 
 //設定しないなら ""で。
-//$badString_A = array("");
-//$badString_B = array("");
+//$bad_str_A = array("");
+//$bad_str_B = array("");
 
 //AとBの単語が2つあったら拒絶します。
 //初期設定では「ブランド品のコピー」という投稿を拒絶します。
@@ -132,10 +186,10 @@ define('ELAPSED_DAYS', 365);
 
 //拒絶するファイルのmd5
 //…使う？？
-$badFile = array("dummy", "dummy2");
+$bad_file = array("dummy", "dummy2");
 
 //拒絶するホスト
-$badIp = array("dummy.example.com", "198.51.100.0");
+$bad_ip = array("dummy.example.com", "198.51.100.0");
 
 //ペイント画面の暗号化キー
 //phpの内部で処理するので覚えておく必要はありません。
@@ -153,17 +207,23 @@ define('DEFAULT_TIMEZONE', 'Asia/Tokyo');
 //※treeのみを消して後に残ったlogは管理者のみ削除可能
 define('USER_DEL', 1);
 
+//セッションの名前
+define('SESSION_NAME', 'reita_session');
+
 /* ---------- お絵かきディレクトリ設定 ---------- */
 
 //複数のお絵描き掲示板を管理する際に便利です。
 
-//neoのディレクトリ。
-define('NEO_DIR', '../backend/neo/');
+//neoのディレクトリ。index.phpから見て
+define('NEO_DIR', 'backend/neo/');
 
-//chickenPaintのディレクトリ。
-define('CHICKEN_DIR', '../backend/chickenpaint/');
+//しぃペインターのディレクトリ。index.phpから見て
+define('SHI_PAINTER_DIR', 'backend/shi_painter/');
 
-/* ---------- お絵かきアプレット設定(neo) ---------- */
+//chickenPaintのディレクトリ。index.phpから見て
+define('CHICKEN_DIR', 'backend/chickenpaint/');
+
+/* ---------- お絵かきアプレット設定(neo/しぃペインター) ---------- */
 
 //アンドゥの回数
 define('UNDO', 90);
@@ -178,7 +238,7 @@ define('SECURITY_CLICK', '');
 //セキュリティタイマー(単位:秒)。設定しないなら''で
 define('SECURITY_TIMER', '');
 //セキュリティにヒットした場合の飛び先
-define('SECURITY_URL', '../backend/security_c.html');
+define('SECURITY_URL', './security_c.html');
 
 //続きを描くときのセキュリティ。利用しないなら両方''で
 //続きを描くときのセキュリティクリック数。設定しないなら''で
@@ -189,7 +249,7 @@ define('C_SECURITY_TIMER', '');
 /* ---------- メイン設定 ---------- */
 
 //画像と動画データ保存ディレクトリ。index.phpから見て
-define('IMG_DIR', '../backend/img/');
+define('IMG_DIR', 'backend/img/');
 
 //投稿容量制限 KB
 define('MAX_KB', 2000);
@@ -222,7 +282,6 @@ define('PAGE_DEF', 10);
 define('DSP_RES', 7);
 
 //そろそろ消える表示のボーダー。最大ログ数からみたパーセンテージ
-//未実装
 define('LOG_LIMIT', 94);
 
 //カタログモードで表示する記事の数
@@ -254,25 +313,22 @@ define('USE_SUB', 0);
 define('DEF_SUB', '無題');  //未入力時の題名
 
 //レス時にスレ題名を引用する する:1 しない:0
-define('USE_RE_SUBJECT', 1);
+define('USE_RE_SUB', 1);
 
 //ハッシュタグリンク機能を使う 使う:1 使わない:0
 define('USE_HASHTAG', 1);
 
-//編集マーク
-define('UPDATE_MARK', '*');
-
 //フォーム下の追加お知らせ <li></li>で囲まれます。
-//(例) $addInfo = ['まだまだ開発中…','バグがあったら教えてね'];
-//設定しないなら $addInfo = ['']; で
-$addInfo = ['https://github.com/sakots/Reita ソースはこちら', 'まだまだ開発中…バグがあったら教えてね。'];
+//(例) $add_info = array('まだまだ開発中…','バグがあったら教えてね');
+//設定しないなら $add_info = array(''); で
+$add_info = array('<a href="https://github.com/sakots/Reita">ソースはこちら</a>', 'まだまだ開発中…バグがあったら教えてね。');
 
 /* ---------- お絵かき設定 ---------- */
 
 //お絵かき機能を使用する お絵かきのみ
 
 //一時ファイルディレクトリ
-define('TEMP_DIR', 'temp/');
+define('TEMP_DIR', 'backend/tmp/');
 
 //一時ファイルディレクトリ内のファイル有効期限(日数)
 define('TEMP_LIMIT', 14);
@@ -297,7 +353,7 @@ define('PALETTE_FILE', 'palette.txt');
 define('USE_SELECT_PALETTES', 1);
 
 //パレットデータファイル切り替え機能を使用する する:1 の時のパレットデーターファイル名
-$palletsData = [['標準', 'palette.txt'], ['PCCS_HSL', 'p_PCCS.txt'], ['マンセルHV/C', 'p_munsellHVC.txt']];
+$pallets_data = array(['標準', 'palette.txt'], ['PCCS_HSL', 'p_PCCS.txt'], ['マンセルHV/C', 'p_munsellHVC.txt']);
 
 //動画機能を使用する する:1 しない:0
 define('USE_ANIME', 1);
@@ -333,4 +389,4 @@ define('CHECK_CSRF_TOKEN', 1);
 
 /* ------------- コンフィグ互換性管理 ------------- */
 
-define('CONFIG_VER', 240412);
+define('CONF_VER', 20250611);
