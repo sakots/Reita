@@ -1505,7 +1505,7 @@ function res(): void {
 }
 
 //お絵描き画面
-function paintform($rep): void {
+function paint_form($rep): void {
 	global $message, $usercode, $quality, $qualitys, $no;
 	global $mode, $ctype, $pch, $type;
 	global $blade, $dat;
@@ -1737,7 +1737,7 @@ function paintform($rep): void {
 
 //アニメ再生
 
-function openpch($pch, $sp = ""): void {
+function open_pch($pch, $sp = ""): void {
 	global $blade, $dat;
 	$message = "";
 
@@ -1798,7 +1798,7 @@ function openpch($pch, $sp = ""): void {
 }
 
 //お絵かき投稿
-function paintcom($tmpmode): void {
+function paint_com($tmpmode): void {
 	global $user_code, $ptime;
 	global $blade, $dat;
 
@@ -1978,7 +1978,7 @@ function in_continue(): void {
 
 //削除くん
 
-function delmode(): void {
+function del_mode(): void {
 	global $admin_pass;
 	global $dat;
 	$del_no = filter_input(INPUT_POST, 'del_no',FILTER_VALIDATE_INT);
@@ -2449,7 +2449,7 @@ function admin(): void {
 }
 
 // コンティニュー認証 (画像)
-function usrchk(): void {
+function usr_chk(): void {
 	global $en;
 	$no = filter_input(INPUT_POST, 'no', FILTER_VALIDATE_INT);
 	$pwd_f = filter_input(INPUT_POST, 'pwd');
