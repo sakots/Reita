@@ -1,11 +1,11 @@
 <?php
 //--------------------------------------------------
-//  おえかきけいじばん「noReita」
+//  おえかきけいじばん「Reita」
 //  by sakots & OekakiBBS reDev.Team  https://oekakibbs.moe/
 //--------------------------------------------------
 
 //スクリプトのバージョン
-define('REITA_VER', 'v1.6.19'); //lot.250613.0
+define('REITA_VER', 'v0.0.0'); //lot.250618.0
 
 //phpのバージョンが古い場合動かさせない
 if (($php_ver = phpversion()) < "7.3.0") {
@@ -43,34 +43,16 @@ if(!isset($misskey_note_ver) || $misskey_note_ver < 20250326){
 	die($en ? 'Please update misskey_note.inc.php to the latest version.' : 'misskey_note.inc.phpを最新版に更新してください。');
 }
 
-//テーマ
-require(__DIR__ . '/theme/' . THEMEDIR . '/theme_conf.php');
-
 //タイムゾーン設定
 date_default_timezone_set(DEFAULT_TIMEZONE);
 
 
-//管理パスが初期値(kanripass)の場合は動作させない
-if ($admin_pass === 'kanripass') {
+//管理パスが初期値(admin_pass)の場合は動作させない
+if ($admin_pass === 'admin_pass') {
 	die("管理パスが初期設定値のままです！危険なので動かせません。<br>\n The admin pass is still at its default value! This program can't run it until you fix it.");
 }
 
-//BladeOne v4.18
-include(__DIR__ . '/BladeOne/lib/BladeOne.php');
-use eftec\bladeone\BladeOne;
-
-$views = __DIR__ . '/theme/' . THEMEDIR; // テンプレートフォルダ
-$cache = __DIR__ . '/cache'; // キャッシュフォルダ
-
-//キャッシュフォルダがなかったら作成
-if (!file_exists($cache)) {
-	mkdir($cache, PERMISSION_FOR_DIR);
-}
-
-$blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO); // MODE_DEBUGだと開発モード MODE_AUTOが速い。
-$blade->pipeEnable = true; // パイプのフィルターを使えるようにする
-
-$dat = array(); // bladeに格納する変数
+$dat = array();
 
 //CheerpJ 4.1
 define('CHEERPJ_URL','https://cjrtnc.leaningtech.com/4.1/loader.js');
@@ -87,7 +69,6 @@ define('IMG_PATH', $path);
 define('TMP_PATH', $temp_path);
 
 $message = "";
-$self = PHP_SELF;
 
 $dat['path'] = IMG_DIR;
 
@@ -97,24 +78,19 @@ $dat['shi_painter_dir'] = SHI_PAINTER_DIR;
 
 $dat['ver'] = REITA_VER;
 $dat['base'] = BASE;
-$dat['btitle'] = TITLE;
+$dat['board_title'] = TITLE;
 $dat['home'] = HOME;
-$dat['self'] = PHP_SELF;
 $dat['message'] = $message;
-$dat['pdefw'] = PDEF_W;
-$dat['pdefh'] = PDEF_H;
-$dat['pmaxw'] = PMAX_W;
-$dat['pmaxh'] = PMAX_H;
+$dat['paint_def_w'] = PAINT_DEF_W;
+$dat['paint_def_h'] = PAINT_DEF_H;
+$dat['paint_max_w'] = PAINT_MAX_W;
+$dat['paint_max_h'] = PAINT_MAX_H;
 
 $dat['max_name'] = MAX_NAME;
 $dat['max_email'] = MAX_EMAIL;
 $dat['max_sub'] = MAX_SUB;
 $dat['max_url'] = MAX_URL;
 $dat['max_com'] = MAX_COM;
-
-$dat['themedir'] = THEMEDIR;
-$dat['tname'] = THEME_NAME;
-$dat['tver'] = THEME_VER;
 
 $dat['switch_sns'] = SWITCH_SNS;
 
@@ -124,22 +100,22 @@ $dat['use_chicken'] = USE_CHICKENPAINT;
 $dat['select_palettes'] = USE_SELECT_PALETTES;
 $dat['pallets_dat'] = $pallets_dat;
 
-$dat['dispid'] = DISP_ID;
-$dat['updatemark'] = UPDATE_MARK;
-$dat['use_resub'] = USE_RESUB;
+$dat['display_id'] = DISPLAY_ID;
+$dat['update_mark'] = "*"; // 更新マーク
+$dat['use_re_sub'] = USE_RE_SUB;
 
-$dat['useanime'] = USE_ANIME;
-$dat['defanime'] = DEF_ANIME;
+$dat['use_anime'] = USE_ANIME;
+$dat['def_anime'] = DEF_ANIME;
 $dat['use_continue'] = USE_CONTINUE;
-$dat['newpost_nopassword'] = !CONTINUE_PASS;
+$dat['new_post_no_password'] = !CONTINUE_PASS;
 
 $dat['use_name'] = USE_NAME;
 $dat['use_com'] = USE_COM;
 $dat['use_sub'] = USE_SUB;
 
-$dat['addinfo'] = $addinfo;
+$dat['add_info'] = $add_info;
 
-$dat['dptime'] = DSP_PAINTTIME;
+$dat['display_paint_time'] = DISPLAY_PAINT_TIME;
 
 $dat['share_button'] = SHARE_BUTTON;
 
@@ -147,14 +123,11 @@ $dat['use_hashtag'] = USE_HASHTAG;
 
 defined('ADMIN_CAP') or define('ADMIN_CAP', '(ではない)');
 
-$dat['sodane'] = SODANE;
+$dat['sodane'] = "そうだね";
 
 //ペイント画面の$pwdの暗号化
 define('CRYPT_METHOD', 'aes-128-cbc');
-define('CRYPT_IV', 'T3pkYxNyjN7Wz3pu'); //半角英数16文字
-
-//テーマがXHTMLか設定されてないなら
-defined('TH_XHTML') or define('TH_XHTML', 0);
+define('CRYPT_IV', 'T3pkYxNydN7Wz4pq'); //半角英数16文字
 
 //日付フォーマット
 defined('DATE_FORMAT') or define('DATE_FORMAT', 'Y/m/d H:i:s');
@@ -181,8 +154,8 @@ $message = "";
 
 //var_dump($_COOKIE);
 
-$pwdc = filter_input(INPUT_COOKIE, 'pwdc');
-$usercode = filter_input(INPUT_COOKIE, 'usercode'); //nullならuser-codeを発行
+$pwd_cookie = filter_input(INPUT_COOKIE, 'pwd_cookie');
+$user_code = filter_input(INPUT_COOKIE, 'user_code'); //nullならuser-codeを発行
 
 //$_SERVERから変数を取得
 //var_dump($_SERVER);
@@ -192,32 +165,32 @@ $req_method = isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : "
 
 //ユーザーip
 function get_uip():	string {
-	if ($userip = getenv("HTTP_CLIENT_IP")) {
-		return $userip;
-	} elseif ($userip = getenv("HTTP_X_FORWARDED_FOR")) {
-		return $userip;
-	} elseif ($userip = getenv("REMOTE_ADDR")) {
-		return $userip;
+	if ($user_ip = getenv("HTTP_CLIENT_IP")) {
+		return $user_ip;
+	} elseif ($user_ip = getenv("HTTP_X_FORWARDED_FOR")) {
+		return $user_ip;
+	} elseif ($user_ip = getenv("REMOTE_ADDR")) {
+		return $user_ip;
 	} else {
-		return $userip;
+		return $user_ip;
 	}
 }
 
 $https_only = (bool)($_SERVER['HTTPS'] ?? '');
 //user-codeの発行
-$usercode = t(filter_input_data('COOKIE', 'usercode')); //user-codeを取得
+$user_code = t(filter_input_data('COOKIE', 'user_code')); //user-codeを取得
 
 session_sta();
-$session_usercode = $_SESSION['usercode'] ?? "";
-$session_usercode = t($session_usercode);
+$session_user_code = $_SESSION['user_code'] ?? "";
+$session_user_code = t($session_user_code);
 
-$usercode = $usercode ? $usercode : $session_usercode;
-if(!$usercode){ //user-codeがなければ発行
-	$userip = get_uip();
-	$usercode = hash('sha256', $userip.random_bytes(16));
+$user_code = $user_code ? $user_code : $session_user_code;
+if(!$user_code){ //user-codeがなければ発行
+	$user_ip = get_uip();
+	$user_code = hash('sha256', $user_ip.random_bytes(16));
 }
-setcookie("usercode", $usercode, time()+(86400*365),"","",$https_only,true); //1年間
-$_SESSION['usercode'] = $usercode;
+setcookie("user_code", $user_code, time()+(86400*365),"","",$https_only,true); //1年間
+$_SESSION['user_code'] = $user_code;
 
 //var_dump($_GET);
 
@@ -232,30 +205,30 @@ $modeMap = [
 	'reply' => 'reply',
 	'res' => 'res',
 	'sodane' => 'sodane',
-	'paint' => fn() => paintform(""),
-	'piccom' => fn() => paintcom(""),
-	'pictmp' => fn() => paintcom("tmp"),
-	'anime' => fn() => openpch($sp ?? ""),
+	'paint' => fn() => paint_form(""),
+	'pic_com' => fn() => paint_com(""),
+	'pic_tmp' => fn() => paint_com("tmp"),
+	'anime' => fn() => open_pch($sp ?? ""),
 	'continue' => 'in_continue',
-	'contpaint' => function() {
+	'cont_paint' => function() {
 		$type = filter_input(INPUT_POST, 'type');
-		if (CONTINUE_PASS || $type === 'rep') usrchk();
-		return paintform($type);
+		if (CONTINUE_PASS || $type === 'rep') usr_chk();
+		return paint_form($type);
 	},
-	'picrep' => 'picreplace',
+	'pic_rep' => 'pic_replace',
 	'catalog' => 'catalog',
 	'search' => 'search',
-	'edit' => 'editform',
-	'editexec' => 'editexec',
-	'del' => 'delmode',
+	'edit' => 'edit_form',
+	'edit_exec' => 'edit_exec',
+	'del' => 'del_mode',
 	'admin_in' => 'admin_in',
-	'admin' => 'admin',
+	'admin' => 'admin_in',
 	'set_share_server' => 'set_share_server',
 	'post_share_server' => 'post_share_server',
 	'before_misskey_note' => [misskey_note::class, 'before_misskey_note'],
 	'misskey_note_edit_form' => [misskey_note::class, 'misskey_note_edit_form'],
-	'create_misskey_note_sessiondata' => [misskey_note::class, 'create_misskey_note_sessiondata'],
-	'create_misskey_authrequesturl' => [misskey_note::class, 'create_misskey_authrequesturl'],
+	'create_misskey_note_session_data' => [misskey_note::class, 'create_misskey_note_session_data'],
+	'create_misskey_auth_request_url' => [misskey_note::class, 'create_misskey_auth_request_url'],
 	'misskey_success' => [misskey_note::class, 'misskey_success'],
 ];
 
@@ -331,7 +304,7 @@ function init(): void {
 //投稿があればデータベースへ保存する
 /* 記事書き込み スレ立て */
 function regist(): void {
-	global $badip, $admin_pass, $admin_name;
+	global $bad_ip, $admin_pass, $admin_name;
 	global $req_method;
 	global $dat;
 
@@ -345,14 +318,14 @@ function regist(): void {
 	$mail = (string)filter_input(INPUT_POST, 'mail');
 	$url = (string)filter_input(INPUT_POST, 'url');
 	$com = (string)filter_input(INPUT_POST, 'com');
-	$picfile = filter_input(INPUT_POST, 'picfile');
+	$pic_file = filter_input(INPUT_POST, 'pic_file');
 	$invz = trim(filter_input(INPUT_POST, 'invz'));
 	$img_w = trim(filter_input(INPUT_POST, 'img_w', FILTER_VALIDATE_INT));
 	$img_h = trim(filter_input(INPUT_POST, 'img_h', FILTER_VALIDATE_INT));
 	$pwd = (string)trim(filter_input(INPUT_POST, 'pwd'));
-	$pwdh = password_hash($pwd, PASSWORD_DEFAULT);
+	$pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
 	$exid = trim(filter_input(INPUT_POST, 'exid', FILTER_VALIDATE_INT));
-	$pal = filter_input(INPUT_POST, 'palettes');
+	$palettes = filter_input(INPUT_POST, 'palettes');
 	$nsfw_flag = (string)filter_input(INPUT_POST, 'nsfw', FILTER_VALIDATE_INT);
 
 	if ($req_method !== "POST") {
